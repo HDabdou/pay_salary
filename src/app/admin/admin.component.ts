@@ -4,6 +4,7 @@ import { HandlerService } from '../service/handler.service';
 import { Chart } from 'chart.js';
 import { DatePipe } from '@angular/common';
 import * as XLSX from 'xlsx';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -109,9 +110,59 @@ export class AdminComponent implements OnInit {
   listSalary =[
     {nom:'Dieng',prenom:'Aliou',telephone:'773250277',salaire:'50000',zone:'Yoff',jAbsence:5,etat:1},
     {nom:'Fall',prenom:'Modou',telephone:'779857780',salaire:'40000',zone:'Foire',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'55000',zone:'Pikine',jAbsence:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',telephone:'779854080',salaire:'85000',zone:'Pikine',jAbsence:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'45000',zone:'Pikine',jAbsence:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'65000',zone:'Pikine',jAbsence:5,etat:1},
     {nom:'Dieye',prenom:'Pape',telephone:'775662089',salaire:'45000',zone:'fann',jAbsence:5,etat:1},
   ]
+  inputRecherche:string = '';
+  listRechecher:any =[]
+  suiviAgnet(){
+    this.listRechecher = [];
+    for(let i of this.listSalary){
+      if(i.nom == this.inputRecherche || i.prenom == this.inputRecherche || i.telephone == this.inputRecherche ){
+        this.listRechecher.push(i)
+      }
+    }
+  }
+  listSalaryAgent =[]
+  evolutionBi(i){
+    this.listSalaryAgent =[]
+    let tel = this.listRechecher[i].telephone
+    for(let i of this.listSalary){
+       this.listSalaryAgent.push(i.salaire)
+        console.log(i.salaire);
+    }
+    console.log(this.listSalaryAgent);
+    
+    this.myChart2 = new Chart('myChart3', {
+      responsive: true,
+      type: 'line',
+      data: {
+         
+          labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
+          datasets: [{
+             label:'les salaires de l\'année',
+              data: this.listSalaryAgent,
+              borderColor: [
+                '#A52A2A',
+              ],
+              borderWidth: 3
+              },
+            
+        ]
+      },
+      options: {
+        events: ['click'],
+        legend: {
+          labels: {
+            fontColor: '#007bff'
+          }
+      }
+      
+      }
+  });
+  }
   soumettreClieck(){
     //if(this.soumettre == 0){
       this.soumettre=1
@@ -346,8 +397,10 @@ export class AdminComponent implements OnInit {
        //this.listRecouvremet = this.Recouvrement
        console.log( this.tabDate); 
        this.myChart2 = new Chart('myChart2', {
+        responsive: true,
         type: 'line',
         data: {
+           
             labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
             datasets: [{
                label:'les salaires de l\'année',
@@ -373,12 +426,13 @@ export class AdminComponent implements OnInit {
     
       //this.listRecouvremet = this.Recouvrement
       this.myChart = new Chart('myChart', {
+        responsive: true,
         type: 'doughnut',
         data: {
             labels: ["Yoff", "Pikine", "Fann"],
             datasets: [{
                 label: '# of Votes',
-  
+               
                 data: [500000,490000, 510000],
                 backgroundColor: [
                   '#A52A2A',
@@ -402,8 +456,9 @@ export class AdminComponent implements OnInit {
             labels: {
               fontColor: '#007bff'
             }
-        }
-         /* onClick: function(e) {
+        },
+        
+         onClick: function(e) {
             var element = this.getElementAtEvent(e);
             if (element.length) {
               console.log(element[0]);
@@ -415,11 +470,13 @@ export class AdminComponent implements OnInit {
               this.liste=1
               var label = chartData.labels[idx];
               var value = chartData.datasets[0].data[idx];
+              
+              this.modalRef1.show('template1');
               var url =label + "  à  " + value;
               console.log(url);
               alert(url);
             }
-          }*/
+          }
         }
     });
 
