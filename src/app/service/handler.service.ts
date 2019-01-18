@@ -14,12 +14,17 @@ export class HandlerService {
   constructor(private http:HttpClient) {
     this.header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
    }
+   private link = "https://mysentool.pro/index.php";
+   public requerirControllerOM(requete:any): Promise<any>{
+    let params="requestParam="+JSON.stringify({requestParam : requete, tokenParam : 'this.token'});
+    let link=this.link+"/om-sen/requerirControllerOM";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {return res} ).catch(error => {return 'bad' });
+  }
 
-  
   public callPeriodicHandler(): Promise<any>{
     let params="requestParam="+(new Date()).toString();
     let link=this.url+"/periodicHendler.php";
-    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => { return res} ).catch(error => {console.log(error); return 'bad' });
   }
   public liste(): Promise<any>{
     let params="requestParam="+(new Date()).toString();

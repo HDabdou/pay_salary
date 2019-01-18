@@ -121,9 +121,12 @@
                         <td > {{l.telephone}} </td>
                         <td >{{l.nom}}</td>
                         <td >{{l.prenom}}</td>
-                        <td ><i class="fa fa-address-card" (click)="openModal(template1);evolutionBi(i)"  style="font-size:25px;color: midnightblue"></i></td>
+                        <td ><i class="fa fa-address-card" (click)="evolutionBi(i)"  style="font-size:25px;color: midnightblue"></i></td>
                       </tbody>
                 </table>
+                <div  class="card">
+                    <canvas  id="myChart3" width="680px" height="400" ></canvas>
+                 </div>
             </div>
           </ng-template>
               

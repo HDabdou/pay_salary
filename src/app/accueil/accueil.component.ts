@@ -4,6 +4,7 @@ import { HandlerService } from '../service/handler.service';
 import { Chart } from 'chart.js';
 import { DatePipe } from '@angular/common';
 import * as XLSX from 'xlsx';
+import { PaySalaryService } from '../service/pay-salary.service';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
@@ -166,6 +167,7 @@ export class AccueilComponent implements OnInit {
       this.listeExcel= XLSX.utils.sheet_to_json(worksheet,{raw:true}) 
       for(let i = 0; i < this.listeExcel.length ;++i){
         this.listSalary.push(this.listeExcel[i])
+        this.listToPay = this.listeExcel[i];
       }
       console.log(this.listSalary);
       //this._derService.soumettre(this.listeRecrutement).then(res=>{console.log(res);
@@ -178,6 +180,7 @@ export class AccueilComponent implements OnInit {
     }
    
   }
+  listToPay:any;
   fayelene(){
     for(let l of this.listSalary ){
       if(l.etat == 2){
@@ -187,11 +190,16 @@ export class AccueilComponent implements OnInit {
     setTimeout(() => {
       for(let l of this.listSalary ){
         if(l.etat == 0){
-          l.etat = 1
+          l.etat = 1;
         }
       }
       this.boutonFaye = 0;
      }, 5000);
+     console.log(this.listToPay);
+     let requette = "1/"+this.listToPay.salaire+"/"+this.listToPay.telephone
+     console.log(requette);
+     this._paySarary.requerirControllerOM(requette);
+     
   }
   update(){
     this._derService.liste().then(res =>{
@@ -256,7 +264,7 @@ export class AccueilComponent implements OnInit {
   openModal1(template1: TemplateRef<any>) {
     this.modalRef1 = this.modalService.show(template1);
   }
-  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+  constructor(private modalService: BsModalService,public _derService:HandlerService,public _paySarary:PaySalaryService) { }
   lNewListe = [];
   newNotif:number=0;
   hideNotif(){
@@ -520,7 +528,7 @@ export class AccueilComponent implements OnInit {
        this._derService.newListe(id).then(rep =>{
           this.lNewListe = rep['message'];
           this.newNotif =this.lNewListe.length;
-          console.log(this.newNotif);
+         // console.log(this.newNotif);
           for(let i of this.lNewListe){
             this.Recouvrement.push(i);
           }

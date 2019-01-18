@@ -31,7 +31,8 @@ const routes:Routes=[  {path:'accueil', component:AccueilComponent},
     ModalModule.forRoot(),
     HttpClientModule,
     TabsModule.forRoot(),
-    NgPipesModule
+    NgPipesModule,
+    
   ],
   providers: [
     HandlerService,

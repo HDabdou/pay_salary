@@ -114,6 +114,12 @@ export class AdminComponent implements OnInit {
     {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'45000',zone:'Pikine',jAbsence:5,etat:1},
     {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'65000',zone:'Pikine',jAbsence:5,etat:1},
     {nom:'Dieye',prenom:'Pape',telephone:'775662089',salaire:'45000',zone:'fann',jAbsence:5,etat:1},
+    {nom:'Dieng',prenom:'Aliou',telephone:'773250277',salaire:'50000',zone:'Yoff',jAbsence:5,etat:1},
+    {nom:'Fall',prenom:'Modou',telephone:'779857780',salaire:'40000',zone:'Foire',jAbsence:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',telephone:'779854080',salaire:'85000',zone:'Pikine',jAbsence:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'45000',zone:'Pikine',jAbsence:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'65000',zone:'Pikine',jAbsence:5,etat:1},
+    {nom:'Dieye',prenom:'Pape',telephone:'775662089',salaire:'45000',zone:'fann',jAbsence:5,etat:1},
   ]
   inputRecherche:string = '';
   listRechecher:any =[]
@@ -126,6 +132,7 @@ export class AdminComponent implements OnInit {
     }
   }
   listSalaryAgent =[]
+  displayEvolutionbi:number = 0;
   evolutionBi(i){
     this.listSalaryAgent =[]
     let tel = this.listRechecher[i].telephone
@@ -162,6 +169,7 @@ export class AdminComponent implements OnInit {
       
       }
   });
+  this.displayEvolutionbi = 1
   }
   soumettreClieck(){
     //if(this.soumettre == 0){
@@ -288,7 +296,7 @@ export class AdminComponent implements OnInit {
   lFinaliser = [];
   modalRef: BsModalRef;
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
   }
   modalRef1: BsModalRef;
   openModal1(template1: TemplateRef<any>) {
@@ -392,6 +400,7 @@ export class AdminComponent implements OnInit {
   tabFN:any=[]
   listDay:any = []
   ngOnInit() {
+   // var path = d3.geo.path() 
     this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
     
        //this.listRecouvremet = this.Recouvrement
