@@ -148,6 +148,7 @@ export class AccueilComponent implements OnInit {
   listeRecrutement:any = [];
   fileName:any;
   fileChange(event) {
+    this.listeRecrutement =[];
     this.file= event.target.files[0];
     console.log(this.file);
     
@@ -165,12 +166,21 @@ export class AccueilComponent implements OnInit {
       var worksheet = workbook.Sheets[first_sheet_name];
       //console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
       this.listeExcel= XLSX.utils.sheet_to_json(worksheet,{raw:true}) 
+      console.log(this.listeExcel);
+      
       for(let i = 0; i < this.listeExcel.length ;++i){
-        this.listSalary.push(this.listeExcel[i])
-        this.listToPay = this.listeExcel[i];
+        console.log(this.listeExcel[i]);
+        this.listeRecrutement.push(this.listeExcel[i])
+       // this.listToPay = this.listeExcel[i];
       }
-      console.log(this.listSalary);
-      //this._derService.soumettre(this.listeRecrutement).then(res=>{console.log(res);
+      for(let i of this.listeRecrutement){
+        console.log(i.JOURS_D_ABSENCE);
+        
+      }
+     // console.log(this.listeRecrutement);
+      //this._paySarary.(this.listeRecrutement).then(res=>{console.log(res);
+      this._derService.soumettre(this.listeRecrutement).then(res => {console.log(res);
+      })
       //})
       this.boutonFaye = 1;
     } 
@@ -180,25 +190,32 @@ export class AccueilComponent implements OnInit {
     }
    
   }
+  listId:any = [];
   listToPay:any;
   fayelene(){
-    for(let l of this.listSalary ){
-      if(l.etat == 2){
-        l.etat = 0
+    for(let l of this.listSalarees ){
+      if(l.etat == 0){
+        l.etat = -1
+        this.listId.push(l.id) 
+        let requette = "3/"+this.getInfo1(l.infoSalaries,'USSD')+"/"+this.getInfo1(l.infoSalaries,'SALAIRE')
+        console.log(requette);
+        this._paySarary.requerirControllerOM(requette).then(res =>{});
       }
     }
-    setTimeout(() => {
-      for(let l of this.listSalary ){
-        if(l.etat == 0){
-          l.etat = 1;
+
+     setInterval(() => {
+      this._derService.recherche(this.listId).then(res =>{
+        console.log(res);
+      })
+      for(let l of this.listSalarees){
+        for(let i of this.listId){
+          if(l.id == i){
+            l.etat = 1;
+          }
         }
       }
       this.boutonFaye = 0;
-     }, 5000);
-     console.log(this.listToPay);
-     let requette = "1/"+this.listToPay.salaire+"/"+this.listToPay.telephone
-     console.log(requette);
-     this._paySarary.requerirControllerOM(requette);
+    }, 9000);
      
   }
   update(){
@@ -361,6 +378,7 @@ export class AccueilComponent implements OnInit {
   tabRV:any=[]
   tabFN:any=[]
   listDay:any = []
+  listSalarees:any =[];
   ngOnInit() {
     this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
     console.log(this.selectionjour);
@@ -446,77 +464,15 @@ export class AccueilComponent implements OnInit {
     
     this._derService.liste().then(res =>{
      // console.log(res['message']);
-      this.Recouvrement= res['message'];
-      for(let i of this.Recouvrement){
-        
+      this.listSalarees = res['message'];
+      for(let i of  this.listSalarees){
         if(i.etat == 0){
-          this.nbRecouvrement = this.nbRecouvrement +1;
-          this.nomRec = this.nomRec + this.getInfo1(i.client,'montant');
+          this.boutonFaye = 1;
         }
-        if(i.etat == 1){
-          this.nbRV = this.nbRV +1;
-          this.nomRV = this.nomRV + this.getInfo1(i.client,'montant');
-        }
-        if(i.etat == 2){
-          this.nbFinalaliser = this.nbFinalaliser +1;
-          this.nomFN = this.nomFN + this.getInfo1(i.client,'montant');
-        }
-       
       }
-      //this.listRecouvremet = this.Recouvrement
-      console.log('Recouvrement '+this.nomRec+' Rendez vous '+this.nomRV+' Finaliser '+this.nomFN); 
-      this.myChart = new Chart('myChart', {
-        type: 'pie',
-        data: {
-            labels: ["Recouvrement", "Rendez-vous", "Finalisés"],
-            datasets: [{
-                label: '# of Votes',
-  
-                data: [this.nomRec,this.nomRV, this.nomFN],
-                backgroundColor: [
-                  '#A52A2A',
-                  '#007bff',
-                  'darkorange'
-                ],
-                borderColor: [
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white'
-                ],
-                borderWidth: 3
-            }]
-        },
-        options: {
-          events: ['click'],
-          legend: {
-            labels: {
-              fontColor: '#007bff'
-            }
-        }
-         /* onClick: function(e) {
-            var element = this.getElementAtEvent(e);
-            if (element.length) {
-              console.log(element[0]);
-              var chartData = element[0]['_chart'].config.data;
-              var idx = element[0]['_index'];
-              console.log('Recouvrement '+this.nomRec+' Rendez vous '+this.nomRV+' Finaliser '+this.nomFN);
-  
-              console.log(idx);
-              this.liste=1
-              var label = chartData.labels[idx];
-              var value = chartData.datasets[0].data[idx];
-              var url =label + "  à  " + value;
-              console.log(url);
-              alert(url);
-            }
-          }*/
-        }
-    });
+
     })
-    setInterval(() => {
+    /*setInterval(() => {
       this._derService.callPeriodicHandler().then( res => {
       //console.log(res['message']);
       if(res['code']==1){
@@ -560,26 +516,44 @@ export class AccueilComponent implements OnInit {
    
     } );
       
-    }, 10000); 
+    }, 10000); */
      // console.log(this.listRecouvremet);
 
   }
   getInfo1(requete,nom){
     let req = JSON.parse(requete);
-    if(nom == "montant"){
-      return req.montant ;
+    if(nom == "INTERIM"){
+      return req.INTERIM ;
     }
-    if(nom == "nom"){
-      return req.nom;
+    if(nom == "LOCALITES"){
+      return req.LOCALITES;
     }
-    if(nom == "prenom"){
-      return req.prenom;   
+    if(nom == "USSD"){
+      return req.USSD;   
     }
-    if(nom == "telephone"){
-      return req.telephone;   
+    if(nom == "KIOSQUES"){
+      return req.KIOSQUES;   
     }
-    if(nom == "adresse"){
-      return req.adresse;   
+    if(nom == "SALAIRE"){
+      return req.SALAIRE;   
+    }
+    if(nom == "PRIME_UV"){
+      return req.PRIME_UV;   
+    }
+    if(nom == "MANQUANT_PAYE"){
+      return req.MANQUANT_PAYE;   
+    }
+    if(nom == "AVOIR"){
+      return req.AVOIR;   
+    }
+    if(nom == "JOURS_D_ABSENCE"){
+      return req.JOURS_D_ABSENCE;   
+    }
+    if(nom == "SALAIRE_PERCU"){
+      return req.SALAIRE_PERCU;   
+    }
+    if(nom == "COM_INTERIM"){
+      return req.COM_INTERIM;   
     }
     return "null";
   }

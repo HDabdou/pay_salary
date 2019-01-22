@@ -9,7 +9,7 @@ export class HandlerService {
 
   //private url:string='https://sentool.bbstvnet.com/handler/';
   
-  private url:string='http://localhost/appDER_backend';
+  private url:string='http://localhost/pay_salary_backend';
   private header :HttpHeaders;
   constructor(private http:HttpClient) {
     this.header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -37,8 +37,8 @@ export class HandlerService {
     let link=this.url+"/newListe.php";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
-  public recherche(date): Promise<any>{
-    let data = JSON.stringify({date:date});
+  public recherche(id): Promise<any>{
+    let data = JSON.stringify({id:id});
     let params ='param='+data;
     let link=this.url+"/recherche.php";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
@@ -61,7 +61,7 @@ export class HandlerService {
     //let params="id="+id;
     let data = JSON.stringify(requette);
     let params ='param='+data;
-    let link=this.url+"/recouvrement.php";
+    let link=this.url+"/salaries.php";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res);return res} ).catch(error => {console.log(error);return 'bad' });
   }
 
