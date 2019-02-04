@@ -5,6 +5,8 @@ import { Chart } from 'chart.js';
 import { DatePipe } from '@angular/common';
 import * as XLSX from 'xlsx';
 import { PaySalaryService } from '../service/pay-salary.service';
+import { Router} from '@angular/router';
+import { ConnexionService } from '../service/connexion.service';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
@@ -22,6 +24,7 @@ export class AccueilComponent implements OnInit {
   display:number=0;
   intervalledateinit:string;
   intervalleddatefinal:string;
+  constructor(private modalService: BsModalService,public _derService:HandlerService,public _paySarary:PaySalaryService,private route:Router,private connectionService:ConnexionService) { }
   rechercheIntervalle(){
     this.tabDate=[]
     this.tabRecouv=[]
@@ -167,7 +170,9 @@ export class AccueilComponent implements OnInit {
       //console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
       this.listeExcel= XLSX.utils.sheet_to_json(worksheet,{raw:true}) 
       console.log(this.listeExcel);
-      
+      this._derService.insertToBd(JSON.stringify(this.listeExcel)).then(rep =>{
+          console.log(rep);
+      });
       for(let i = 0; i < this.listeExcel.length ;++i){
         console.log(this.listeExcel[i]);
         this.listeRecrutement.push(this.listeExcel[i])
@@ -281,7 +286,7 @@ export class AccueilComponent implements OnInit {
   openModal1(template1: TemplateRef<any>) {
     this.modalRef1 = this.modalService.show(template1);
   }
-  constructor(private modalService: BsModalService,public _derService:HandlerService,public _paySarary:PaySalaryService) { }
+  
   lNewListe = [];
   newNotif:number=0;
   hideNotif(){
@@ -380,6 +385,15 @@ export class AccueilComponent implements OnInit {
   listDay:any = []
   listSalarees:any =[];
   ngOnInit() {
+    let token=sessionStorage.getItem("token");
+    let id=sessionStorage.getItem("id");
+    this.connectionService.verifUser(token,id).then(rep =>{
+      console.log(rep);
+      if(rep["status"]=="0"){
+        this.route.navigate(['/login']);
+      }
+
+    });
     this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
     console.log(this.selectionjour);
     this._derService.recherche(this.selectionjour).then(res =>{
@@ -556,5 +570,15 @@ export class AccueilComponent implements OnInit {
       return req.COM_INTERIM;   
     }
     return "null";
+  }
+  deconnection(){
+    this.connectionService.deconnection().then(rep =>{
+      if(rep["status"]=="1"){
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("id");
+        this.route.navigate(['/login']);
+      }
+    });
+   
   }
 }

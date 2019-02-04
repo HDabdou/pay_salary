@@ -9,8 +9,10 @@ export class HandlerService {
 
   //private url:string='https://sentool.bbstvnet.com/handler/';
   
-  private url:string='http://localhost/pay_salary_backend';
+  private url:string='http://127.0.0.1:8080';
   private header :HttpHeaders;
+  private token=sessionStorage.getItem("token");
+  private id=sessionStorage.getItem("id");
   constructor(private http:HttpClient) {
     this.header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
    }
@@ -28,7 +30,7 @@ export class HandlerService {
   }
   public liste(): Promise<any>{
     let params="requestParam="+(new Date()).toString();
-    let link=this.url+"/liste.php";
+    let link=this.url+"/accueil/getListe";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
   public newListe(id): Promise<any>{
@@ -63,6 +65,16 @@ export class HandlerService {
     let params ='param='+data;
     let link=this.url+"/salaries.php";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res);return res} ).catch(error => {console.log(error);return 'bad' });
+  }
+  public insertToBd(info:string):Promise<any>{
+    let url=this.url+"/accueil/insertToBd";
+    let params="param="+JSON.stringify({id:this.id,token:this.token,info:info});
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
+
   }
 
 }

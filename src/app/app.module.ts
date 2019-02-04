@@ -11,6 +11,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import {NgPipesModule} from 'ngx-pipes';
 import { AdminComponent } from './admin/admin.component';
+import { ConnexionService } from './service/connexion.service';
 
 const routes:Routes=[  {path:'accueil', component:AccueilComponent},
 {path:'login', component:ConnexionComponent},
@@ -36,6 +37,7 @@ const routes:Routes=[  {path:'accueil', component:AccueilComponent},
   ],
   providers: [
     HandlerService,
+    ConnexionService
   ],
   bootstrap: [AppComponent]
 })
