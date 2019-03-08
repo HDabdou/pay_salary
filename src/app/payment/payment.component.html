@@ -1,0 +1,52 @@
+<div style="width:95%;margin-left:5em;margin-right: 5em;margin-top:2em">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
+      <!--<label for="file" class="label-file" style="font-size: 25px;margin-left: 3rem">Soumettre une liste</label>-->
+      
+      <input id="file" class="input-file" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls"> 
+      <label style="font-size: 20px;color: darkorange;">{{fileName}}</label>    
+    </div>
+    <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+      <button *ngIf="listeExcel.length>0" class="btn btn-success" (click)="fayelene()">Payer</button>
+    </div>
+  </div>
+</div>
+<div style="width:95%;margin-left:0.5em;margin-right:0.5em;margin-top:2em">
+    <table *ngIf="listeExcel.length>0" class="table table-codensed table-striped">
+        <thead >
+          <tr>
+            <th scope="col">INTERIM</th>
+            <th scope="col">LOCALITES </th>
+            <th scope="col">USSD </th>
+            <th scope="col">KIOSQUES</th>
+            <th scope="col"> SALAIRE </th>
+            <th scope="col"> PRIME UV </th>
+            <th scope="col"> MANQUANT PAYE  </th>
+            <th scope="col"> AVOIR </th>
+            <th scope="col"> JOURS D'ABSENCE </th>
+            <th scope="col"> SALAIRE PERCU</th>
+            <th scope="col"> ACTION </th>
+          </tr>
+        </thead>
+        <tbody>
+                                 
+          <tr *ngFor="let l of listeExcel ; let i=index">
+              <td >{{l.INTERIM}}</td>
+              <td >{{l.LOCALITES}}</td>
+              <td >{{l.USSD}}</td>
+              <td >{{l.KIOSQUES}}</td>
+              <td >{{l.SALAIRE}}</td>
+              <td >{{l.PRIME_UV}}</td>
+              <td >{{l.MANQUANT_PAYE}}</td>
+              <td >{{l.AVOIR}}</td>
+              <td >{{l.JOURS_D_ABSENCE}}</td>
+              <td >{{l.SALAIRE_PERCU}}</td>
+              <td *ngIf="l.etat == 1"><i class="fa fa-check-square-o" style="font-size:25px;color: green"></i></td>
+              <td *ngIf="l.etat == -1"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+              <td *ngIf="l.etat == 0">-</td>
+              <button (click)="payeOne(l,i)" class="btn btn-primary">Payer</button> 
+            </tbody>
+      </table>
+      
+
+</div>

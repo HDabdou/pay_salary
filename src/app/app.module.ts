@@ -12,23 +12,33 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import {NgPipesModule} from 'ngx-pipes';
 import { AdminComponent } from './admin/admin.component';
 import { ConnexionService } from './service/connexion.service';
-
+import { HistoriqueComponent } from './historique/historique.component';
+import { Routing } from './app.routing';
+import { PaymentComponent } from './payment/payment.component';
+import { AddInfoComponent } from './add-info/add-info.component';
+import { PipeService } from './service/pipe.service';
+import { BbspipePipe } from './service/bbspipe.pipe';
+/*
 const routes:Routes=[  {path:'accueil', component:AccueilComponent},
 {path:'login', component:ConnexionComponent},
 {path:'admin', component:AdminComponent},
 {path:'',redirectTo:'/login' ,pathMatch:'full'},
-];
+];*/
 @NgModule({
   declarations: [
     AppComponent,
     ConnexionComponent,
     AccueilComponent,
-    AdminComponent
+    AdminComponent,
+    HistoriqueComponent,
+    PaymentComponent,
+    AddInfoComponent,
+    BbspipePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    Routing,
     ModalModule.forRoot(),
     HttpClientModule,
     TabsModule.forRoot(),
@@ -37,7 +47,8 @@ const routes:Routes=[  {path:'accueil', component:AccueilComponent},
   ],
   providers: [
     HandlerService,
-    ConnexionService
+    ConnexionService,
+    PipeService
   ],
   bootstrap: [AppComponent]
 })
