@@ -76,5 +76,52 @@ export class HandlerService {
     });
 
   }
+  public getEmolyes():Promise<any>{
+    return new Promise((resolve,reject)=>{
+      let url=this.url+"/accueil/getEmployes";
+      let params="param="+JSON.stringify({id:this.id,token:this.token});
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
+  }
+  public getAbsent(){
+    let url=this.url+"/accueil/getAbsent";
+    let params="param="+JSON.stringify({id:this.id,token:this.token});
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
+  }
+  public validerEnregistrementAbsence(prenom:string,nom:string,id_user:number,date:any){
+    let url=this.url+"/accueil/validerEnregistrementAbsence";
+    let params="param="+JSON.stringify({id:this.id,token:this.token,prenom:prenom,nom:nom,id_user:id_user,date:date});
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
+  }
+  public supprimerAbsence(id:number){
+    let url=this.url+"/accueil/supprimerAbsence";
+    let params="param="+JSON.stringify({id:this.id,token:this.token,id_user:id});
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
+
+  }
+  public facture(data:string){
+    let url=this.url+"/accueil/facture";
+    let params="param="+JSON.stringify({data:data});
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
+
+  }
 
 }
