@@ -9,7 +9,7 @@ export class HandlerService {
 
   //private url:string='https://sentool.bbstvnet.com/handler/';
   
-  private url:string='http://localhost/pay_salary_backend';
+  private url:string='http://localhost:8080/pay_salary_backend';
   private header :HttpHeaders;
   constructor(private http:HttpClient) {
     this.header = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
