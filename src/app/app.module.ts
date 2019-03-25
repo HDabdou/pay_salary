@@ -18,12 +18,14 @@ import { PaymentComponent } from './payment/payment.component';
 import { AddInfoComponent } from './add-info/add-info.component';
 import { PipeService } from './service/pipe.service';
 import { BbspipePipe } from './service/bbspipe.pipe';
+
 /*
 const routes:Routes=[  {path:'accueil', component:AccueilComponent},
 {path:'login', component:ConnexionComponent},
 {path:'admin', component:AdminComponent},
 {path:'',redirectTo:'/login' ,pathMatch:'full'},
 ];*/
+
 @NgModule({
   declarations: [
     AppComponent,

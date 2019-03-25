@@ -12,7 +12,7 @@ export class ConnexionService {
     })
   };
 
-  private link="http://127.0.0.1:8080";
+  private link="http://cloudpharma.bbstvnet.com/pay_salary_middleware/public/index.php";
 
   constructor(private http:HttpClient) {
    // this.headers.append('Content-Type','application/x-www-form-urlencoded');

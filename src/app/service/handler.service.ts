@@ -9,7 +9,7 @@ export class HandlerService {
 
   //private url:string='https://sentool.bbstvnet.com/handler/';
   
-  private url:string='http://127.0.0.1:8080';
+  private url:string='http://cloudpharma.bbstvnet.com/pay_salary_middleware/public/index.php';
   private header :HttpHeaders;
   private token=sessionStorage.getItem("token");
   private id=sessionStorage.getItem("id");
