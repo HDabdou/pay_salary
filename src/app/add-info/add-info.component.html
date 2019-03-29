@@ -1,0 +1,88 @@
+<div style="width:50%;margin-left: auto;margin-right: auto;margin-top:2em"> 
+  <div>
+    <ul>
+      <li (click)="switch('new')"><a>enregistrement</a></li>
+      <li (click)="switch('liste')"><a>liste d'absence</a></li>
+    </ul>
+  </div>
+  <div>
+      <input [(ngModel)]="searchText" placeholder="prenom ou telephone" class="form-control" style="widows: 40%;" />
+  </div>
+  <div *ngIf="liste">
+    
+    <table class="table table-striped table-condensed">
+      <thead>
+          <tr>
+              <th>Prenom</th>
+              <th>Nom</th>
+              <th>Date</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of listeAbsence | bbspipe : searchText">
+          <td>{{a.prenom}}</td>
+          <td>{{a.nom}}</td>
+          <td>{{a.date}}</td>
+          <!--<td><input type="button" value="modifier" class="btn btn-primary" /></td>-->
+          <td><input (click)="supprimerAbsence(a)" type="button" value="supprimer" class="btn btn-danger" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="new">
+     <!-- <form>
+          <div class="form-group">
+            <label>Employes :</label>
+            <select [(ngModel)]="emp" name="emp" class="form-control">
+              <option value="">veuillez choisir un employe</option>
+              <option *ngFor="let e of employes" value="{{e}}">{{e.prenom +" "+e.nom}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date :</label>
+            <input  [(ngModel)]="date" name="date" type="date" class="form-control"/>
+          </div>
+          <button class="btn btn-primary">valider</button>
+        </form>-->
+        <table class="table table-condensed table-striped">
+          <thead>
+            <tr>
+              <th>Prenom</th>
+              <th>Nom</th>
+              <th>Telephone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of employes | bbspipe : searchText">
+              <td>{{e.prenom}}</td>
+              <td>{{e.nom}}</td>
+              <td>{{e.telephone}}</td>
+              <td><input class="btn btn-primary" (click)="marquer(e,absent)" type="button" value="Marquer" /></td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+</div>
+<ng-template #absent >
+  <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Enregistrement D'absence</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="hideMOdalMarquer()">
+               <span aria-hidden="true">&times;</span>
+          </button>
+   </div>
+   <div class="modal-body" >
+     <div class="form-group">
+       <label>Date</label>
+       <input [(ngModel)]="date" name="date" type="date" class="form-control"   />
+     </div>
+     <div>
+       <input type="button" (click)="validerEnregistrementAbsence()" value="valider" class="btn btn-success" />
+     </div>
+   </div>
+   <div class="modal-footer">
+       <input type="button" (click)="hideMOdalMarquer()"  value="annuler"  class="btn btn-danger" />
+   </div>
+</ng-template>
+

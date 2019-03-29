@@ -1,24 +1,17 @@
-<p></p>
+<!--<p></p>
 <div class="container-fluid"  style="padding: 0;margin: 0;margin-left: -1rem;">
   <div [ngClass]='changeBackThem()'></div>
- <!-- <nav class="sidebar-nav">
-    <ul>
-      <li style="background-color: whitesmoke">ok</li>
-    </ul>
-  </nav> -->
-
   <div class="panel panel-info">
         <div class="panel panel-heading"></div>
         <div class="panel panel-body">
           
-          <nav class="nav navbar-default navbar-fixed-top myNav" [ngClass]=' changeThem()' style="margin-top:-1rem;">
+          <nav class="nav navbar-default navbar-fixed-top myNav" [ngClass]=' changeThem()' style="margin-top:-1rem;background-color: aquamarine">
               <a class="nav-item nav-link active" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
                 <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
                   Accueil</span>
               </a>
               <a class="nav-item nav-link" href="#suivi" data-toggle="tab" style="border-radius: 1rem 0rem 1rem 1rem;">
-                <!--<span class="badge myBadge" (click)="hideNotif()" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;">Suivi</span>
-                <span *ngIf="newNotif > 0" (click)="hideNotif()" class="dot" style="position: absolute;text-align: center;border: 1px solid white ;box-shadow: 1px 2px 4px rgba(0, 0, 0, .5)">{{newNotif}}</span>-->
+               
               </a>
               <div class="dropdown">
                 <button style="float: right;margin-top: 1rem;margin-right: 1rem" class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,20 +22,9 @@
                   <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
                 </div>
               </div>
-             <!-- <div class="dropdown" style="margin-left: 55rem">
-                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Paramétre
-                </button>
-                <div >
-                  <div class="dropdown-menu collapsible-header" aria-labelledby="dropdownMenuButton">
-                   <a class="btn btn-defaul" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Théme</a>
-                  </div>
-                  <div class="collapsible-body" id="multiCollapseExample1">
-                  <a  class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
-                  <a  class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>  
-                 </div>
-                </div>
-              </div>-->
+              <button (click)="deconnection()" class="btn btn-danger pull-right">Deconnection</button>
+              
+             
             </nav>
             <div class="tab-content">
                 <div class="tab-pane " id="Suivi">
@@ -168,17 +150,7 @@
                     </div>
                     
                   </div>
-                   <!-- <div class="row" style="margin-top:1rem">
-                        <div class="col-2">
-                          <span class="badge badge-success" (click)="soumettreClieck()" style="font-size: 110%;cursor: pointer;">Soumettre une liste</span>
-                        </div>
-                        <div class="col-4" *ngIf="soumettre == 1">
-                          <input  class="form-control" style="border: transparent" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls">
-                        </div>
-                        <div class="col-6" style="text-align: left" *ngIf="soumettre == 1">
-                          <button class="col-3" type="submit" (click)="soumission()"  class="btn btn-warning ">Fermer</button>
-                        </div>
-                      </div>-->
+                  
 
                      
                 </div>
@@ -211,7 +183,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <!--| filterBy: ['dateEnregistremet','client']: filtre-->
+                           
                           <tr *ngFor="let l of listSalarees ; let i=index">
                               <td >{{getInfo1(l.infoSalaries,'INTERIM')}}</td>
                               <td >{{getInfo1(l.infoSalaries,'LOCALITES')}}</td>
@@ -284,4 +256,48 @@
           </div>
         </ng-template>
     </div>
+</div>-->
+<div>
+  <div>
+    <nav class="nav navbar-default navbar-fixed-top myNav" [ngClass]=' changeThem()' style="margin-top:-1rem;background-color: aquamarine">
+      <a class="nav-item nav-link active" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
+        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
+          Accueil</span>
+      </a>
+      <a class="nav-item nav-link active" style="border-radius: 1rem 0rem 1rem 1rem;" [routerLink]="['/accueil','historique']" data-toggle="tab">
+        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
+          Historique</span>
+      </a>
+      <a class="nav-item nav-link active" [routerLink]="['/accueil','payment']" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
+        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
+          New Payment</span>
+      </a>
+      <a class="nav-item nav-link active" [routerLink]="['/accueil','addinfo']" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
+        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
+          Add Info</span>
+      </a>
+      <a class="nav-item nav-link active" [routerLink]="['/accueil','message']" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
+        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
+          Messagerie</span>
+      </a>
+      <a class="nav-item nav-link" href="#suivi" data-toggle="tab" style="border-radius: 1rem 0rem 1rem 1rem;">
+       
+      </a>
+      <div class="dropdown">
+        <button style="float: right;margin-top: 1rem;margin-right: 1rem" class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          setting
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
+          <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
+        </div>
+      </div>
+      <button (click)="deconnection()" class="btn btn-danger pull-right">Deconnection</button>
+      
+     
+    </nav>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>

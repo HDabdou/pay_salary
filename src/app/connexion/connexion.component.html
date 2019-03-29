@@ -11,21 +11,17 @@
                 </div>
                 <div class="panel-body">
                     <form class="form-signin" (ngSubmit)="onConnect()"  #patientForm="ngForm">
-                      <div  *ngIf="Error==1">
+                      <div  *ngIf="Error">
                             <h4 class="alert alert-danger">Login ou mot de passe incorrecte</h4>
                       </div>
                       <div class="form-group">
                         <label class="control-label"><strong>Login</strong></label>
-                         <input class="form-control" type="text" placeholder="Donner votre login" name="login" required
-                         [(ngModel)]="login"
-                         #name="ngModel">
+                         <input class="form-control" type="text" placeholder="Donner votre login" name="login" required [(ngModel)]="login" name="login">
                         
                       </div>
                       <div class="form-group">
                         <label class="control-label"><strong> Password</strong></label>
-                         <input class="form-control"  placeholder="Donner votre mot de passe" type="password" name="password" required
-                         [(ngModel)]="password"
-                         #name="ngModel">
+                         <input class="form-control"  placeholder="Donner votre mot de passe" type="password" name="password" required [(ngModel)]="password" name="password">
                         
                       </div>
                      <p></p>
