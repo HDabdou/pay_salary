@@ -13,6 +13,8 @@ export class ConnexionComponent implements OnInit {
 
   login:string;
   password:string;
+  loginTest:string='admin1';
+  passwordTest:string='passer1';
   loginTest1:string='admin1';
   passwordTest1:string='passer1';
   Error:boolean=false;

@@ -71,6 +71,7 @@ export class HandlerService {
     let params="param="+JSON.stringify({id:this.id,token:this.token,info:info});
     return new Promise((resolve,reject)=>{
       this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        console.log(reponse) ;
         resolve(reponse);
       });
     });
