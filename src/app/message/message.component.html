@@ -1,0 +1,73 @@
+<div class="container border border-info" style="height: 40rem; margin-left: 18rem;padding: 0%;margin-top: 3rem;border-radius: 2rem 2rem 1rem 1rem;border: 1px black;">
+  <ul class="nav nav-pills" style="padding-left: 1rem;">
+    <!--<li class="active"><a data-toggle="tab" href="#home">Home</a></li>-->
+    <li><a data-toggle="tab" style=" font-size: 2rem;" href="#menu1">Ajouter contact</a></li>
+    <li><a data-toggle="tab" style=" font-size: 2rem;" href="#menu2">Nouvel Campagne</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="menu1" style="margin-top: 1rem" class="tab-pane fade">
+      <div style="width:95%;margin-left:5em;margin-right: 5em;margin-top:2em">
+        <div class="row">
+          <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
+            <!--<label for="file" class="label-file" style="font-size: 25px;margin-left: 3rem">Soumettre une liste</label>-->
+            <label for="file" class="label-file" style="font-size: 25px;margin-left: 3rem;position: absolute">Soumettre une liste</label>
+            <label style="margin-left: 28rem;font-size: 18px;color: black;margin-top: 8px;">{{fileName}}</label>
+            <input id="file" class="input-file" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls">
+         
+           <!-- <input id="file" class="input-file" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls"> 
+            <label style="font-size: 20px;color: darkorange;">{{fileName}}</label>  -->  
+          </div>
+          <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+            <button *ngIf="listeExcel.length>0" class="btn btn-success" (click)="fayelene()">Payer</button>
+          </div>
+        </div>
+      </div>
+      <div style="width:95%;margin-left:0.5em;margin-right:0.5em;margin-top:2em">
+          <table *ngIf="listeExcel.length>0" class="table table-codensed table-striped">
+              <thead >
+                <tr>
+                  <th scope="col">PRENOM</th>
+                  <th scope="col">NOM </th>
+                  <th scope="col">TELEPHONE</th>
+                  <th scope="col"> ACTION </th>
+                </tr>
+              </thead>
+              <tbody>
+                                       
+                <tr *ngFor="let l of listeExcel ; let i=index">
+                    <td >{{l.prenom}}</td>
+                    <td >{{l.nom}}</td>
+                    <td >{{l.telephone}}</td>
+                    <button (click)="payeOne(l,i)" class="btn btn-primary">Payer</button> 
+                  </tbody>
+            </table>
+      </div>   
+     </div>
+    <div id="menu2" style="margin-top: 1rem" class="tab-pane fade">
+      <div class="row">
+        <div class="col-6">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" style=" font-size: 2rem;" for="inputGroupSelect01">Group à envoyer</label>
+                </div>
+                <select class="form-control" [(ngModel)]="groupSelect" style=" font-size: 2rem;margin-top: 1rem" name="group" id="inputGroupSelect01">
+                  <option value="">Selection....</option>
+                  <option *ngFor="let g of listeGroup" value="{{g.nom}}">{{g.nom}}</option>
+                </select>
+              </div>
+        </div>
+        <div *ngIf="groupSelect != '' " class="col-6">
+            <div class="form-group">
+              <label for="comment">Message:</label>
+              <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+   
+  </div>
+
+</div>
+ 

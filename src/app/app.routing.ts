@@ -5,6 +5,7 @@ import {AccueilComponent} from './accueil/accueil.component';
 import {PaymentComponent} from './payment/payment.component';
 import {AdminComponent} from './admin/admin.component';
 import { AddInfoComponent } from './add-info/add-info.component';
+import { MessageComponent } from './message/message.component';
 
 
 
@@ -18,6 +19,7 @@ const appRoutes=[
                   {path:'historique',component:HistoriqueComponent},
                   {path:'payment',component:PaymentComponent},
                   {path:'addinfo',component:AddInfoComponent},
+                  {path:'message',component:MessageComponent},
                 ]
               },
               {path:'**',redirectTo:''}

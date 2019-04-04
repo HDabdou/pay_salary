@@ -9,6 +9,9 @@ export class HandlerService {
 
   //private url:string='https://sentool.bbstvnet.com/handler/';
   
+//<<<<<<< HEAD
+ // private url:string='http://localhost:8080/pay_salary_backend';
+
   private url:string='http://cloudpharma.bbstvnet.com/pay_salary_middleware/public/index.php';
   private header :HttpHeaders;
   private token=sessionStorage.getItem("token");
@@ -112,7 +115,6 @@ export class HandlerService {
         resolve(reponse);
       });
     });
-
   }
   public facture(data:string){
     let url=this.url+"/accueil/facture";

@@ -33,13 +33,13 @@ export class ConnexionComponent implements OnInit {
      }
    });
   }
-  if(this.login==this.loginTest1 && this.password==this.passwordTest1){
+  /*if(this.login==this.loginTest1 && this.password==this.passwordTest1){
     this.router.navigate(['/admin']);
   }else if(this.login==this.loginTest && this.password==this.passwordTest){
       this.router.navigate(['/accueil']);
     }else{
       alert("ko")
-    }
+    }*/
       
    
   }
