@@ -12,6 +12,7 @@
                               <th scope="col"> PRIME UV </th>
                               <th scope="col"> MANQUANT PAYE  </th>
                               <th scope="col"> AVOIR </th>
+                              <th scope="col"> ABS LIS </th>
                               <th scope="col"> JOURS D'ABSENCE </th>
                               <th scope="col"> SALAIRE PERCU</th>
                               <th scope="col"> Etat </th>
@@ -27,6 +28,7 @@
                               <td >{{getInfo1(l.infoSalaries,'PRIME_UV')}}</td>
                               <td >{{getInfo1(l.infoSalaries,'MANQUANT_PAYE')}}</td>
                               <td >{{getInfo1(l.infoSalaries,'AVOIR')}}</td>
+                              <td >{{getInfo1(l.infoSalaries,'ABS_LIS')}}</td>
                               <td >{{getInfo1(l.infoSalaries,'JOURS_D_ABSENCE')}}</td>
                               <td >{{getInfo1(l.infoSalaries,'SALAIRE_PERCU')}}</td>
                               <td *ngIf="l.etat == 1"><i class="fa fa-check-square-o" style="font-size:25px;color: green"></i></td>

@@ -1,0 +1,10 @@
+.container{
+	min-width: 100%;
+    background-image: url('../../assets/backLogin.jpeg');
+    margin: 0;
+    background-size: cover;
+}
+
+.panel{
+	background-color: transparent; 
+}

@@ -49,6 +49,9 @@ export class HistoriqueComponent implements OnInit {
     if(nom == "AVOIR"){
       return req.AVOIR;   
     }
+    if(nom == "ABS_LIS"){
+      return req.ABS_LIS;   
+    }
     if(nom == "JOURS_D_ABSENCE"){
       return req.JOURS_D_ABSENCE;   
     }
