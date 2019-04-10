@@ -2,9 +2,9 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HandlerService } from '../service/handler.service';
 import { Chart } from 'chart.js';
-import { DatePipe } from '@angular/common';
+//import { DatePipe } from '@angular/common';
 import * as XLSX from 'xlsx';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
+//import { Template } from '@angular/compiler/src/render3/r3_ast';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -296,8 +296,9 @@ export class AdminComponent implements OnInit {
   lFinaliser = [];
   modalRef: BsModalRef;
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
-  }
+    //this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
+    this.modalRef = this.modalService.show(template);
+   }
   modalRef1: BsModalRef;
   openModal1(template1: TemplateRef<any>) {
     this.modalRef1 = this.modalService.show(template1);
@@ -308,6 +309,16 @@ export class AdminComponent implements OnInit {
   hideNotif(){
     this.newNotif=0;
   }
+
+  modalRef4: BsModalRef;
+  openModalWithClass(template: TemplateRef<any>) {
+    this.modalRef4 = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+  }
+
+
   Recherche(){
     console.log(this.selectionjour);
     this.tabDate=[]
