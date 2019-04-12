@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 1rem">
+    <button class="btn btn-info" (click)="validation()">Valider la liste</button>
+  </div>
+  <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 1rem">
+    <div  id="tab" >
+      <table class="table table-striped table-responsive table-dark " >
+        <thead >
+        <tr>
+          <th scope="col">INTERIM</th>
+          <th scope="col">USSD </th>
+          <th scope="col">KIOSQUES</th>
+          <th scope="col"> SALAIRE </th>
+          <th scope="col"> PRIME UV </th>
+          <th scope="col"> MANQUANT PAYE  </th>
+          <th scope="col"> AVOIR </th>
+          <th scope="col"> JOURS D'ABSENCE </th>
+          <th scope="col"> SALAIRE PERCU</th>
+          <th scope="col"> Etat </th>
+          <th scope="col"> Option </th>
+          <th scope="col"> Option </th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let l of listeSalaire ; let i=index">
+        <td >{{l.interim}}</td>
+        <td >{{l.ussd}}</td>
+        <td >{{l.kiosque}}</td>
+        <td >{{l.salaire}}</td>
+        <td >{{l.prime_uv}}</td>
+        <td >{{l.manquant_paye}}</td>
+        <td >{{l.avoire}}</td>
+        <td >{{l.jour_absence}}</td>
+        <td >{{l.salaire_percu}}</td> 
+        <td *ngIf="l.etat == 0"> <span style="color: crimson"> <strong>non valider</strong> </span> </td> 
+        <td *ngIf="l.etat == 1"> <span style="color: teal"><i class="fa fa-check-square-o" style="font-size:25px;color: teal"></i> <strong>Valider</strong></span> </td> 
+        <td ><button class="btn btn-warning" (click)="openModal1(template1);getIndex(i)" type="submit"><i class="fa fa-pencil"></i> Modifier</button></td>
+        <td ><button class="btn btn-danger" (click)="deleteUser(i)" type="submit"><i class="fa fa-remove"></i> Supprimer</button></td>
+    </tbody>
+    </table>
+    </div>
+  
+  </div>
+</div>
+
+<ng-template #template1 >
+  <div class="modal-header " style="background-color: dodgerblue;color:white">
+    <h4 class="modal-title pull-left">Modification du salariée</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeUpdateModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div  class="modal-body">
+    <form   >
+      <div class="control-group">
+        <label for="" class="control-label">INTERIM</label>
+        <input  type="text" class="form-control" [(ngModel)]="lineClick.interim"  name="nom" id="idNom">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">USSD</label>
+        <input type="text"  class="form-control" [(ngModel)]="lineClick.ussd" name="prenom" id="IdPrenom">
+      </div>     
+       <div class="control-group">
+        <label for="" class="control-label">KIOSQUES</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.hiosques" name="login" id="IdLogin">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">SALAIRE</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.salaire" name="salaire" id="idsalaire">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">PRIME UV</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.prime_uv" name="prime_uv" id="idPrime_uv">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">MANQUANT PAYE</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.manquant_paye" name="MANQUANT_PAYE" id="idMANQUANTPAYE">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">AVOIR</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.avoire" name="AVOIR" id="isAVOIR">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">JOURS D'ABSENCE</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.jour_absence" name="JOURS_ABSENCE" id="JOURS_ABSENCE">
+      </div>
+      <div class="control-group">
+        <label for="" class="control-label">SALAIRE PERCU</label>
+        <input type="text" class="form-control" [(ngModel)]="lineClick.salaire_percu" name="SALAIRE_PERCU" id="idSALAIRE_PERCU">
+      </div>
+      <div class="control-group" style="margin-top:1rem">
+        <button (click)="closeUpdateModal()" class="btn btn-danger">Annuler</button>
+        <button style="margin-left:1rem" (click)="updateUser()" class="btn btn-success">Valider</button>
+      </div>
+      
+    </form>
+  </div>
+</ng-template>

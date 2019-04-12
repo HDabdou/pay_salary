@@ -21,6 +21,7 @@ import { BbspipePipe } from './service/bbspipe.pipe';
 import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GestionCompteComponent } from './gestion-compte/gestion-compte.component';
+import { ValidationComponent } from './validation/validation.component';
 
 /*
 const routes:Routes=[  {path:'accueil', component:AccueilComponent},
@@ -41,7 +42,8 @@ const routes:Routes=[  {path:'accueil', component:AccueilComponent},
     BbspipePipe,
     MessageComponent,
     DashboardComponent,
-    GestionCompteComponent
+    GestionCompteComponent,
+    ValidationComponent
   ],
   imports: [
     BrowserModule,
