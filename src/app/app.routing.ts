@@ -6,13 +6,21 @@ import {PaymentComponent} from './payment/payment.component';
 import {AdminComponent} from './admin/admin.component';
 import { AddInfoComponent } from './add-info/add-info.component';
 import { MessageComponent } from './message/message.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GestionCompteComponent } from './gestion-compte/gestion-compte.component';
 
 
 
 const appRoutes=[
 
               {path:'',component:ConnexionComponent},
-              {path:'admin', component:AdminComponent},
+              {path:'admin', component:AdminComponent,
+              children:[
+                {path:'',component:DashboardComponent},
+                {path:'dashboad',component:DashboardComponent},
+                {path:'gestionuser',component:GestionCompteComponent},
+              ]
+            },
               {path:'accueil',component:AccueilComponent,
                 children:[
                   {path:'',component:HistoriqueComponent},

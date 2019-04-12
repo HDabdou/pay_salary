@@ -19,6 +19,8 @@ import { AddInfoComponent } from './add-info/add-info.component';
 import { PipeService } from './service/pipe.service';
 import { BbspipePipe } from './service/bbspipe.pipe';
 import { MessageComponent } from './message/message.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GestionCompteComponent } from './gestion-compte/gestion-compte.component';
 
 /*
 const routes:Routes=[  {path:'accueil', component:AccueilComponent},
@@ -37,7 +39,9 @@ const routes:Routes=[  {path:'accueil', component:AccueilComponent},
     PaymentComponent,
     AddInfoComponent,
     BbspipePipe,
-    MessageComponent
+    MessageComponent,
+    DashboardComponent,
+    GestionCompteComponent
   ],
   imports: [
     BrowserModule,

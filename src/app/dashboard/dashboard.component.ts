@@ -1,16 +1,17 @@
-import { Component, OnInit, TemplateRef, ElementRef, ViewChild } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HandlerService } from '../service/handler.service';
 import { Chart } from 'chart.js';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
-//import { Template } from '@angular/compiler/src/render3/r3_ast';
+
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class AdminComponent implements OnInit {
+export class DashboardComponent implements OnInit {
+
 
 
   soumettre:number = 0;
@@ -574,5 +575,4 @@ export class AdminComponent implements OnInit {
     }
     return "null";
   }
-
 }
