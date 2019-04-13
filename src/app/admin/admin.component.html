@@ -1,43 +1,40 @@
-<div class="container-fluid"  style="padding: 0;margin: 0;margin-left: -1rem;">
+<div class="container-fluid"  style="padding: 0;margin: 0;margin-left: 0rem;">
   <div [ngClass]='changeBackThem()'></div>
- <!-- <nav class="sidebar-nav">
-    <ul>
-      <li style="background-color: whitesmoke">ok</li>
-    </ul>
-  </nav> -->
-
-  <div >
+  <div class="row">
         <div class="panel panel-body">
-          
-          <nav class="nav navbar-default navbar-fixed-top myNav" [ngClass]=' changeThem()' style="margin-top:-1rem;">
-              <a class="nav-item nav-link active" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
-                <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
-                  Accueil</span>
-              </a>
-              <a class="nav-item nav-link" href="#suivi" data-toggle="tab" style="border-radius: 1rem 0rem 1rem 1rem;">
-                <!--<span class="badge myBadge" (click)="hideNotif()" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;">Suivi</span>
-                <span *ngIf="newNotif > 0" (click)="hideNotif()" class="dot" style="position: absolute;text-align: center;border: 1px solid white ;box-shadow: 1px 2px 4px rgba(0, 0, 0, .5)">{{newNotif}}</span>-->
-              </a>
-              <div class="dropdown" style="margin-left: 60rem">
-                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  setting
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
-                  <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
-                </div>
-              </div>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: 	#1E90FF !important">
+            <a class="navbar-brand" style="color: white"><i class="fa fa-home" style="font-size:24px"></i> Accueil - admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="color: white"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown" style="float: right;">
+                  <a class="nav-link dropdown-toggle" style="color: white;cursor: pointer;" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Parametre
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
+                    <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
+               </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link btn btn-danger" (click)="deconnexion()" style="color: white;cursor: pointer;">Déconnexion</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
 
-            </nav>
             <div class="tab-content">
                 <div class="tab-pane active" id="accueil">
+
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="row"  [ngClass]=' changeThem()' style="margin-bottom: 2rem;margin-left: 3rem;margin-right: 3rem;background-color: white;height: 74px;margin-top: 1rem;padding: 0;width: 677px;    word-wrap: break-word;
-                        background-color: #fff;
-                        background-clip: border-box;
-                        border: 1px solid rgba(0,0,0,.125);
-                        border-radius: .25rem;">
+                          background-color: #fff;
+                          background-clip: border-box;
+                          border: 1px solid rgba(0,0,0,.125);
+                          border-radius: .25rem;">
                             <div class="col-5">
                               <label  class="control-label" for="dateJour">Date par jour</label>
                               <div class="row">
@@ -49,16 +46,15 @@
                               <label style="margin-left: 2rem" class="control-label">Date par intervalle</label>
                               <div class="row" style="margin-left: -3rem">
                                   <input  name="intervalledateinit" style="width: 9rem"  type="date" [(ngModel)]="intervalledateinit" >
-                                   <span style="color: white">à</span> 
-                                  <input name="intervalleddatefinal" style="width: 9rem;margin-left: 0.5rem; margin-right: 1rem" type="date" [(ngModel)]="intervalleddatefinal">
+                                   <span  [ngClass]=' changeThem()'>à</span> 
+                                  <input name="intervalleddatefinal" style="margin-left: 0.5rem; margin-right: 1rem" type="date" [(ngModel)]="intervalleddatefinal">
                                   
                                   <i  class="btn btn-primary fa fa-search" type="button" (click)="rechercheIntervalle()" ></i>
                               </div>
                             </div>
                           </div>
                         <div  id="chart1"  class="col-12" style=" margin-top: 1rem; " >
-                          <div  [ngClass]=' changeThem()'  style=" width: 680px; height: 513px; text-align: center;padding:0%;margin-left: 25%;background-color: white;margin-left: 2rem;background-color: #fff;
-                          background-clip: border-box;
+                          <div  [ngClass]=' changeThem()'  style="
                           border: 1px solid rgba(0,0,0,.125);
                           border-radius: .25rem;">
                             <canvas  id="myChart2" width="680px" height="400" ></canvas>
@@ -68,8 +64,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                       <button class="btn btn-primary" (click)="openModal(template)" style="float: right;margin-right: 1rem;margin-top: 1rem">Suivi</button>
                         <div   id="chart" class="col-12" style=" margin-top: 6rem; " >
-                          <div  [ngClass]=' changeThem()' style=" width: 600px; height: 600px; text-align: center;padding:0%;margin-left: 25%; background-color: white;margin-left: 2rem;background-color: #fff;
-                          background-clip: border-box;
+                          <div  [ngClass]=' changeThem()' style="
                           border: 1px solid rgba(0,0,0,.125);
                           border-radius: .25rem;">
                             <canvas  id="myChart" width="400" height="400" ></canvas>
@@ -78,19 +73,7 @@
                     </div>
                     
                   </div>
-                   <!-- <div class="row" style="margin-top:1rem">
-                        <div class="col-2">
-                          <span class="badge badge-success" (click)="soumettreClieck()" style="font-size: 110%;cursor: pointer;">Soumettre une liste</span>
-                        </div>
-                        <div class="col-4" *ngIf="soumettre == 1">
-                          <input  class="form-control" style="border: transparent" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls">
-                        </div>
-                        <div class="col-6" style="text-align: left" *ngIf="soumettre == 1">
-                          <button class="col-3" type="submit" (click)="soumission()"  class="btn btn-warning ">Fermer</button>
-                        </div>
-                      </div>-->
 
-                     
                 </div>
             </div>
         </div>
@@ -103,7 +86,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <input type="text" name="recherche" id="idRecheche" [(ngModel)]="inputRecherche" >
+              <input type="text" name="recherche" id="idRecheche" [(ngModel)]="inputRecherche" />
               <i  class="btn btn-primary fa fa-search" style="margin-left: 0.5rem" (click)="suiviAgnet()" ></i>
               <table class="table table-striped">
                   <thead >
@@ -115,15 +98,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <!--| filterBy: ['dateEnregistremet','client']: filtre-->
-                    <tr *ngFor="let l of listRechecher ; let i=index">
-                        <td > {{l.telephone}} </td>
-                        <td >{{l.nom}}</td>
-                        <td >{{l.prenom}}</td>
-                        <td ><i class="fa fa-address-card" (click)="evolutionBi(i)"  style="font-size:25px;color: midnightblue"></i></td>
-                      </tbody>
+
+                      <tr *ngFor="let l of listRechecher;let i=index ">
+                          <td> {{l.telephone}} </td>
+                          <td>{{l.nom}} </td>
+                          <td>{{l.prenom}} </td>
+                          <td><i class="fa fa-address-card" (click)="evolutionBi(i)" style="font-size:25px;color: midnightblue"></i>
+                          </td>
+                      </tr>
+                    </tbody>
                 </table>
-                <div  class="card">
+                <div class="card">
                     <canvas  id="myChart3" width="680px" height="400" ></canvas>
                  </div>
             </div>
@@ -142,8 +127,8 @@
              </div>
           </div>
         </ng-template>
-    </div>
 </div>
+
 <ng-template #template4>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>

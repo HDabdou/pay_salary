@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HandlerService } from '../service/handler.service';
 import { Chart } from 'chart.js';
-//import { DatePipe } from '@angular/common';
+import { Router} from '@angular/router';
 import * as XLSX from 'xlsx';
 //import { Template } from '@angular/compiler/src/render3/r3_ast';
 @Component({
@@ -303,7 +303,7 @@ export class AdminComponent implements OnInit {
   openModal1(template1: TemplateRef<any>) {
     this.modalRef1 = this.modalService.show(template1);
   }
-  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+  constructor(private modalService: BsModalService,public _derService:HandlerService,private route:Router) { }
   lNewListe = [];
   newNotif:number=0;
   hideNotif(){
@@ -318,7 +318,9 @@ export class AdminComponent implements OnInit {
     );
   }
 
-
+  deconnexion(){
+    this.route.navigate(['/login']);
+  }
   Recherche(){
     console.log(this.selectionjour);
     this.tabDate=[]
