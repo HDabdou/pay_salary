@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-audit',
@@ -37,10 +38,14 @@ export class AuditComponent implements OnInit {
     {date:new Date().toJSON(),nom:"naby",prenom:"NDIAYE",salaire:"49000",user:"Maty",domaine:"Messagerie"}
   ]
   resultSeach:any=null;
+  searchResponse:boolean;
+  message:boolean;
   auditInsertion(){
     this.choice="insertion";
   }
-
+  auditSuppression(){
+    this.choice="suppression";
+  }
   seachInsertion(date,user,domaine){
     this.resultSeach=[];
     console.log(this.listeInsertion);
@@ -49,6 +54,13 @@ export class AuditComponent implements OnInit {
       if( i.user == user && i.domaine == domaine){
         this.resultSeach.push(i);
       }
+    }
+    if(this.resultSeach.length == 0){
+      this.searchResponse = false;
+      this.message = true;
+    }else{
+      this.searchResponse = true;
+      this.message = true;
     }
     console.log(this.resultSeach);
 
