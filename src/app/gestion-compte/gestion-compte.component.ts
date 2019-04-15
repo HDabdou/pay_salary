@@ -12,6 +12,7 @@ export class GestionCompteComponent implements OnInit {
   password:string;
   Rpassword:string;
   Restartpassword:string;
+  filtre:string;
   indice:any;
   user={nom:"",prenom:"",login:"",etat:0};
   users=[

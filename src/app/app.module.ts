@@ -22,6 +22,7 @@ import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GestionCompteComponent } from './gestion-compte/gestion-compte.component';
 import { ValidationComponent } from './validation/validation.component';
+import { AuditComponent } from './audit/audit.component';
 
 /*
 const routes:Routes=[  {path:'accueil', component:AccueilComponent},
@@ -43,7 +44,8 @@ const routes:Routes=[  {path:'accueil', component:AccueilComponent},
     MessageComponent,
     DashboardComponent,
     GestionCompteComponent,
-    ValidationComponent
+    ValidationComponent,
+    AuditComponent
   ],
   imports: [
     BrowserModule,

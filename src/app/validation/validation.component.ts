@@ -9,6 +9,7 @@ import { HandlerService } from '../service/handler.service';
 })
 export class ValidationComponent implements OnInit {
 
+  filtre:string;
   password:string;
   Rpassword:string;
   Restartpassword:string;

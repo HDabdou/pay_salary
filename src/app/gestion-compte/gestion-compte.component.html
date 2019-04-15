@@ -1,6 +1,16 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 1rem">
-      <button class="btn btn-info" (click)="openModal(template)">Créer un utilisateur</button>
+      <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+        <button class="btn btn-info" (click)="openModal(template)">Créer un utilisateur</button>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+        <label  class="control-label">Filtre</label>
+      </div >
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
+         <input type="text" class="form-control" [(ngModel)]="filtre" name="filtre" id="filtre">
+      </div>
+    </div>
     </div>
     <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 1rem">
       <div  id="tab" >
@@ -17,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let l of users ; let i=index;">
+            <tr *ngFor="let l of users | filterBy: ['prenom','nom','login']: filtre ; let i=index;">
                 <td >{{i+1}}</td>
                 <td >{{l.prenom}}</td>
                 <td >{{l.nom}}</td>

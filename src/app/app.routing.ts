@@ -9,6 +9,7 @@ import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GestionCompteComponent } from './gestion-compte/gestion-compte.component';
 import { ValidationComponent } from './validation/validation.component';
+import { AuditComponent } from './audit/audit.component';
 
 
 
@@ -21,6 +22,7 @@ const appRoutes=[
                 {path:'dashboad',component:DashboardComponent},
                 {path:'gestionuser',component:GestionCompteComponent},
                 {path:'validation',component:ValidationComponent},
+                {path:'audit',component:AuditComponent},
               ]
             },
               {path:'accueil',component:AccueilComponent,
