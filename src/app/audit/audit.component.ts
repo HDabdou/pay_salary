@@ -11,6 +11,7 @@ export class AuditComponent implements OnInit {
 
   closeUpdateModal(){
     this.modalRef1.hide();
+    this.reinitialiser();
   }
   constructor(private modalService: BsModalService) { }
  
@@ -81,6 +82,7 @@ export class AuditComponent implements OnInit {
     this.click=false;
     this.lineClickedAfter = [];
     this.lineClickedBefore = [];
+    this.reinitialiser();
   }
   seachInsertion(date,user,domaine){
     this.resultSeach=[];
@@ -100,6 +102,19 @@ export class AuditComponent implements OnInit {
     }
     console.log(this.resultSeach);
 
+  }
+
+  reinitialiser(){
+    this.searchResponse = false;
+    this.message = false;
+    this.resultSeach=[];
+    this.click=false;
+    this.lineClickedAfter = [];
+    this.lineClickedBefore = [];
+    this.choice = null;
+    this.date = null;
+    this.user = null;
+    this.domaine = null;
   }
 
   ngOnInit() {
