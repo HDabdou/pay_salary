@@ -17,6 +17,5 @@ return items.filter( it => {
       return it.toLowerCase().includes(searchText);
     });
    }
-
   //constructor() { }
 }

@@ -101,9 +101,11 @@ export class AuditComponent implements OnInit {
       this.message = true;
     }
     console.log(this.resultSeach);
-
   }
 
+  currencyFormat(somme) : String{
+    return Number(somme).toLocaleString() ;
+  }
   reinitialiser(){
     this.searchResponse = false;
     this.message = false;

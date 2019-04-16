@@ -68,7 +68,7 @@ export class MessageComponent implements OnInit {
     {nom:"Comptable"},
     {nom:"Developpeur"},
   ]
- 
+  
   addGroup(){
     if(this.groupName != ""){
       if(confirm("Etes-Vous sure de vouloir enregistrer ce groupe ?")){
