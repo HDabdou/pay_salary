@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HandlerService } from '../service/handler.service';
 import * as XLSX from 'xlsx';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-message',
@@ -19,8 +20,13 @@ export class MessageComponent implements OnInit {
   message:string="";
   groupName:string="";
 
-  constructor(public _derService:HandlerService) { }
-
+  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+ 
+   modalRef1: BsModalRef;
+  openModal1(template1: TemplateRef<any>) {
+    //this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
+    this.modalRef1 = this.modalService.show(template1);
+   }
   ngOnInit() {
   }
   fileChange(event) {
@@ -101,5 +107,32 @@ export class MessageComponent implements OnInit {
   sendSMS(){
     console.log(this.message+" au "+this.groupSelect);
     this.reinitialiser();
+  }
+  listeSMS:any=[];
+  recherche:string;
+  listeMessagerie =[
+    {nom:"Abdou",prenom:"FALL",tel:"779854080"},
+    {nom:"Fatou",prenom:"DIENG",tel:"783854080"},
+    {nom:"Naby",prenom:"NDIAYE",tel:"772220594"},
+    {nom:"Coumba",prenom:"DIOP",tel:"764854080"},
+  ]
+
+  rechecheSMS(){
+    this.listeSMS=[];
+    for(let i of this.listeMessagerie){
+      if(i.tel == this.recherche || i.nom == this.recherche || i.prenom == this.recherche){
+        this.listeSMS.push(i);
+      }
+    }
+    console.log(this.listeSMS);
+  }
+  supprimerReach(i){
+    if(confirm("Etes-Vous sure de vouloir supprimer ce client ?")){
+      this.listeSMS.splice(i,1);
+    }
+  }
+  userClick:any;
+  getUser(i){
+    this.userClick = this.listeSMS[i]
   }
 }

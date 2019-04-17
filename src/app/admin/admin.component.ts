@@ -421,13 +421,13 @@ export class AdminComponent implements OnInit {
  myDiv;
   closeNav(){
     this.myDiv = document.getElementById("navbarNavDropdown");
-    if(this.myDiv.style.display === "none"){
-      this.myDiv.style.display ="block";
-    }else{
-      this.myDiv.style.display = "none";
-    }
-    console.log(this.myDiv.classList);
-   
+    //if(this.myDiv.classList.length == 3){
+      if(this.myDiv.style.display === "none"){
+        this.myDiv.style.display ="block";
+      }else{
+        this.myDiv.style.display = "none";
+      }
+    //} 
   }
   ngOnInit() {
     this.myDiv = document.getElementById("navbarNavDropdown");

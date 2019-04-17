@@ -1,7 +1,7 @@
 <div class="container border border-info" style="margin-top: 1rem;border-radius: 2rem 2rem 1rem 1rem;border: 1px black;">
 <div>
-  <tabset>
-    <tab heading="Ajouter contact" id="tab1">
+  <tabset >
+    <tab heading="Ajouter contact" style="font-size: 9px;color: darkorange"  id="tab1">
       <div class="row" style="margin-top: 1rem">
         <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
           <label for="file" class="label-file" style="font-size: 25px;margin-left: 1rem;position: absolute">Soumettre une liste</label>
@@ -82,10 +82,86 @@
           </div>
         </div>
       </div>
-   
-
     </tab>
+        
+    <tab heading="Option">
+        <div class="row" style="margin-top: 1rem">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="control-group">
+              <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+                  <label class="control-label"  >Recheche </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+                  <input class="form-control" [(ngModel)]="recherche"  name="recherche" >
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+                  <button  class="btn btn-success" (click)="rechecheSMS()"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="listeSMS.length >0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div >
+                <table  class="table table-responsive table-codensed table-striped">
+                  <thead >
+                    <tr>
+                      <th scope="col">PRENOM</th>
+                      <th scope="col">NOM </th>
+                      <th scope="col">TELEPHONE</th>
+                      <th scope="col"> ACTION </th>
+                      <th scope="col"> ACTION </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                  <tr *ngFor="let l of listeSMS ; let i=index">
+                    <td >{{l.prenom}}</td>
+                    <td >{{l.nom}}</td>
+                    <td >{{l.tel}}</td>
+                    <td><button (click)="openModal1(template1)" class="btn btn-info">Modifier</button></td> 
+                    <td><button (click)="supprimerReach(i)" class="btn btn-warning">Supprimer</button></td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </tab>
+  
   </tabset>
 </div>
 </div>
  
+<ng-template #template1 >
+    <div class="modal-header " style="background-color: dodgerblue;color:white">
+      <h4 class="modal-title pull-left">Modification d'utilisateur</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeUpdateModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="userClick != null" class="modal-body">
+      <form   >
+        <div class="control-group">
+          <label for="" class="control-label">Nom</label>
+          <input  type="text" class="form-control" [(ngModel)]="Mnom" value="{{Mnom}}" name="nom" id="idNom">
+        </div>
+        <div class="control-group">
+          <label for="" class="control-label">Prenom</label>
+          <input type="text"  class="form-control" [(ngModel)]="Mprenom" name="prenom" id="IdPrenom">
+        </div>     
+         <div class="control-group">
+          <label for="" class="control-label">Login</label>
+          <input type="text" class="form-control" [(ngModel)]="Mlogin" name="login" id="IdLogin">
+        </div>
+        <div class="control-group">
+          <label for="" class="control-label">Réinitialissation  mot de passe</label>
+          <input type="password" class="form-control" [(ngModel)]="Restartpassword" name="password" id="idRpassword">
+        </div>
+        <div class="control-group" style="margin-top:1rem">
+          <button (click)="closeUpdateModal()" class="btn btn-danger">Annuler</button>
+          <button style="margin-left:1rem" (click)="updateUser()" class="btn btn-success">Valider</button>
+        </div>
+        
+      </form>
+    </div>
+  </ng-template>
