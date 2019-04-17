@@ -417,7 +417,21 @@ export class AdminComponent implements OnInit {
   tabRV:any=[]
   tabFN:any=[]
   listDay:any = []
+ 
+ myDiv;
+  closeNav(){
+    this.myDiv = document.getElementById("navbarNavDropdown");
+    if(this.myDiv.style.display === "none"){
+      this.myDiv.style.display ="block";
+    }else{
+      this.myDiv.style.display = "none";
+    }
+    console.log(this.myDiv.classList);
+   
+  }
   ngOnInit() {
+    this.myDiv = document.getElementById("navbarNavDropdown");
+    this.myDiv.style.display = "none"
    // var path = d3.geo.path() 
     this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
     

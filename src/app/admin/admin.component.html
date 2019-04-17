@@ -5,20 +5,20 @@
           <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: 	#1E90FF !important">
             <a class="navbar-brand" style="color: white"><i class="fa fa-home" style="font-size:24px"></i> Accueil - admin</a>
             <button class="navbar-toggler" id="myDiv" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon" style="color: white"></span>
+              <span class="navbar-toggler-icon"  (click)="closeNav()" style="color: white"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav">
-                <li class="nav-item" >
+                <li class="nav-item" (click)="closeNav()" >
                   <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/admin','dashboad']">Dashboad</a>
                  </li>
-                 <li class="nav-item" >
+                 <li class="nav-item" (click)="closeNav()" >
                   <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/admin','gestionuser']">Gestion utilisateur</a>
                  </li>
-                 <li class="nav-item" >
+                 <li class="nav-item" (click)="closeNav()">
                   <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/admin','validation']">Validation</a>
                  </li>
-                 <li class="nav-item" >
+                 <li class="nav-item" (click)="closeNav()" >
                   <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/admin','audit']">Audit</a>
                  </li>
                   <li class="nav-item dropdown" style="float: right;">
@@ -26,8 +26,8 @@
                     Parametre
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" (click)="sombre();hideMenu()"  style="cursor: pointer;">Sombre</a>
-                    <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
+                    <a class="dropdown-item" (click)="sombre();closeNav()"  style="cursor: pointer;">Sombre</a>
+                    <a class="dropdown-item" (click)="claire();closeNav()" style="cursor: pointer;">Claire</a>
                </div>
                 </li>
                 <li class="nav-item">
