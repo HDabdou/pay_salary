@@ -10,7 +10,7 @@
                   <input type="date" class="form-control" [(ngModel)]="date" name="date" id="idDate">
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
-                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button class="btn btn-primary"(click)="Recherhce(date,date)" ><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -24,7 +24,7 @@
                     <input type="date" class="form-control" [(ngModel)]="dateFin" name="dateFin" id="iddateFin">
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                      <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                      <button class="btn btn-primary" (click)="Recherhce(dateDebut,dateFin)"><i class="fa fa-search"></i></button>
                   </div>
               </div>
             </div>

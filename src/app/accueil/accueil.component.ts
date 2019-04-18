@@ -236,27 +236,7 @@ export class AccueilComponent implements OnInit {
     }, 9000);
      
   }
-  update(){
-    this._derService.liste().then(res =>{
-       this.Recouvrement= res['message'];
-       for(let i of this.Recouvrement){
-         
-         if(i.etat == 0){
-           this.nbRecouvrement = this.nbRecouvrement +1;
-           this.nomRec = this.nomRec + this.getInfo1(i.client,'montant');
-         }
-         if(i.etat == 1){
-           this.nbRV = this.nbRV +1;
-           this.nomRV = this.nomRV + this.getInfo1(i.client,'montant');
-         }
-         if(i.etat == 2){
-           this.nbFinalaliser = this.nbFinalaliser +1;
-           this.nomFN = this.nomFN + this.getInfo1(i.client,'montant');
-         }
-        
-       }
-    })
-  }
+ 
   them:any;
   
   sombre(){
@@ -490,17 +470,7 @@ export class AccueilComponent implements OnInit {
         }
     });
      })
-    
-    this._derService.liste().then(res =>{
-     // console.log(res['message']);
-      this.listSalarees = res['message'];
-      for(let i of  this.listSalarees){
-        if(i.etat == 0){
-          this.boutonFaye = 1;
-        }
-      }
 
-    })
     /*setInterval(() => {
       this._derService.callPeriodicHandler().then( res => {
       //console.log(res['message']);

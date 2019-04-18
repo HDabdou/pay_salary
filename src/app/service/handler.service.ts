@@ -31,9 +31,10 @@ export class HandlerService {
     let link=this.url+"/periodicHendler.php";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => { return res} ).catch(error => {console.log(error); return 'bad' });
   }
-  public liste(): Promise<any>{
-    let params="requestParam="+(new Date()).toString();
-    let link=this.url+"/accueil/getListe";
+  public liste(date1,date2): Promise<any>{
+    let data = JSON.stringify({'datea':date1,'dateb':date2});
+    let params="requestParam="+data;
+    let link=this.url+"/accueil/getListeByInterval";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
   public newListe(id): Promise<any>{
