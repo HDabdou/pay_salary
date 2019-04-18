@@ -1,0 +1,100 @@
+<div class="tab-content">
+    <div class="tab-pane active" id="accueil">
+      <div class="container-fluid ">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+            <div class="row" [ngClass]=' changeThem()'  style="margin-bottom: 2rem;margin-left: 0rem;margin-right: 0rem;background-color: white;margin-top: 1rem;padding: 0;   word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
+                  <label  class="control-label" for="dateJour">Date par jour</label>
+                  <div class="row">
+                  <input  type="date" id="datejour" style="width: 9rem;margin-left: 5px" name="datejour" [(ngModel)]="selectionjour" />
+                    <i  class="btn btn-primary fa fa-search" style="margin-left: 0.5rem" (click)="Recherche()" ></i>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " >
+                  <label  class="control-label">Date par intervalle</label>
+                  <div class="row" >
+                      <input  name="intervalledateinit" style="width: 9rem"  type="date" [(ngModel)]="intervalledateinit" >
+                        <span  [ngClass]=' changeThem()'>à</span> 
+                      <input name="intervalleddatefinal" style="margin-left: 0.5rem; margin-right: 1rem" type="date" [(ngModel)]="intervalleddatefinal">
+                      
+                      <i  class="btn btn-primary fa fa-search" type="button" (click)="rechercheIntervalle()" ></i>
+                  </div>
+                </div>
+              </div>
+            <div  id="chart1"  class="col-12" style=" margin-top: 1rem; " >
+              <div  [ngClass]=' changeThem()'  style="
+              border: 1px solid rgba(0,0,0,.125);
+              border-radius: .25rem;">
+                <canvas  id="myChart2" width="680px" height="400" ></canvas>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">  
+          <button class="btn btn-primary" (click)="openModal(template)" style="float: right;margin-right: 1rem;margin-top: 1rem">Suivi</button>
+            <div   id="chart" class="col-12" style=" margin-top: 6rem; " >
+              <div  [ngClass]=' changeThem()' style="
+              border: 1px solid rgba(0,0,0,.125);
+              border-radius: .25rem;">
+                <canvas  id="myChart" width="400" height="400" ></canvas>
+              </div>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+      
+    </div>
+</div>
+
+<ng-template #template >
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Suivi des agents</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="text" name="recherche" id="idRecheche" [(ngModel)]="inputRecherche" >
+    <i  class="btn btn-primary fa fa-search" style="margin-left: 0.5rem" (click)="suiviAgnet()" ></i>
+    <table class="table table-striped">
+        <thead >
+            <tr>
+              <th scope="col">Telephone</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Prenom</th>
+              <th scope="col">Suivre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--| filterBy: ['dateEnregistremet','client']: filtre-->
+          <tr *ngFor="let l of listRechecher ; let i=index">
+              <td > {{l.telephone}} </td>
+              <td >{{l.nom}}</td>
+              <td >{{l.prenom}}</td>
+              <td ><i class="fa fa-address-card" (click)="evolutionBi(i)"  style="font-size:25px;color: midnightblue"></i></td>
+            </tbody>
+      </table>
+      <div  class="card">
+          <canvas  id="myChart3" width="680px" height="400" ></canvas>
+       </div>
+  </div>
+</ng-template>
+    
+<ng-template #template1 >
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Chart</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef1.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+   <div>
+      <canvas  id="myChart3" width="680px" height="400" ></canvas>
+   </div>
+</div>
+</ng-template>

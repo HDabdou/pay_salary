@@ -1,43 +1,38 @@
-<div>
-  <div>
-    <nav class="nav navbar-default navbar-fixed-top myNav" [ngClass]=' changeThem()' style="margin-top:-1rem;background-color: aquamarine">
-      <a class="nav-item nav-link active" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
-        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-home" style="font-size:24px"></i>
-          Accueil</span>
-      </a>
-      <a class="nav-item nav-link active" style="border-radius: 1rem 0rem 1rem 1rem;" [routerLink]="['/accueil','historique']" data-toggle="tab">
-        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-history" style="font-size:24px"></i>
-          Historique</span>
-      </a>
-      <a class="nav-item nav-link active" [routerLink]="['/accueil','payment']" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
-        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-money" style="font-size:24px"></i>
-          Paiement</span>
-      </a>
-      <a class="nav-item nav-link active" [routerLink]="['/accueil','addinfo']" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
-        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-info-circle" style="font-size:24px"></i>
-          Add Info</span>
-      </a>
-      <a class="nav-item nav-link active" [routerLink]="['/accueil','message']" style="border-radius: 1rem 0rem 1rem 1rem;" href="#accueil" data-toggle="tab">
-        <span class="badge myBadge" style="font-size: 150%;margin-left: 8px;border-radius: 1rem 0rem 1rem 1rem;"><i class="fa fa-envelope" style="font-size:24px"></i>
-          Messagerie</span>
-      </a>
-      <a class="nav-item nav-link" href="#suivi" data-toggle="tab" style="border-radius: 1rem 0rem 1rem 1rem;">
-       
-      </a>
-      <div class="dropdown">
-        <button style="float: right;margin-top: 1rem;margin-right: 1rem" class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          setting
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
-          <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
-        </div>
-      </div>
-      <button (click)="deconnection()" class="btn btn-danger pull-right">Deconnection</button>
-      
-     
-    </nav>
-  </div>
+ 
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: 	#1E90FF !important">
+    <a class="navbar-brand" style="color: white"><i class="fa fa-home" style="font-size:24px"></i> Accueil - user</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="color: white"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item" >
+         <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','historique']">Historique</a>
+        </li>
+        <li class="nav-item" >
+        <a class="nav-link hide" data-toggle="pill" style="color: white;cursor: pointer;" [routerLink]="['/accueil','payment']">New payment</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','addinfo']">Add info</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','message']">Messagerie</a>
+        </li>
+        <li class="nav-item dropdown" style="float: right;">
+          <a class="nav-link dropdown-toggle" style="color: white;cursor: pointer;" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Parametre
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
+            <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
+       </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-danger" (click)="deconnection()" style="color: white;cursor: pointer;">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <div>
     <router-outlet></router-outlet>
