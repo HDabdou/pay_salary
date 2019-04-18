@@ -117,7 +117,7 @@
                     <td >{{l.prenom}}</td>
                     <td >{{l.nom}}</td>
                     <td >{{l.tel}}</td>
-                    <td><button (click)="openModal1(template1)" class="btn btn-info">Modifier</button></td> 
+                    <td><button (click)="getUser(i);openModal1(template1)" class="btn btn-info">Modifier</button></td> 
                     <td><button (click)="supprimerReach(i)" class="btn btn-warning">Supprimer</button></td>
                   </tbody>
                 </table>
@@ -143,23 +143,19 @@
       <form   >
         <div class="control-group">
           <label for="" class="control-label">Nom</label>
-          <input  type="text" class="form-control" [(ngModel)]="Mnom" value="{{Mnom}}" name="nom" id="idNom">
+          <input  type="text" class="form-control" [(ngModel)]="userClick.nom" value="{{Mnom}}" name="nom" id="idNom">
         </div>
         <div class="control-group">
           <label for="" class="control-label">Prenom</label>
-          <input type="text"  class="form-control" [(ngModel)]="Mprenom" name="prenom" id="IdPrenom">
+          <input type="text"  class="form-control" [(ngModel)]="userClick.prenom" name="prenom" id="IdPrenom">
         </div>     
          <div class="control-group">
-          <label for="" class="control-label">Login</label>
-          <input type="text" class="form-control" [(ngModel)]="Mlogin" name="login" id="IdLogin">
-        </div>
-        <div class="control-group">
-          <label for="" class="control-label">Réinitialissation  mot de passe</label>
-          <input type="password" class="form-control" [(ngModel)]="Restartpassword" name="password" id="idRpassword">
+          <label for="" class="control-label">Téléphone</label>
+          <input type="text" class="form-control" [(ngModel)]="userClick.tel" name="login" id="IdLogin">
         </div>
         <div class="control-group" style="margin-top:1rem">
           <button (click)="closeUpdateModal()" class="btn btn-danger">Annuler</button>
-          <button style="margin-left:1rem" (click)="updateUser()" class="btn btn-success">Valider</button>
+          <button style="margin-left:1rem" (click)="updateUser1()" class="btn btn-success">Valider</button>
         </div>
         
       </form>

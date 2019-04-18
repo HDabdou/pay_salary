@@ -27,6 +27,9 @@ export class MessageComponent implements OnInit {
     //this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
     this.modalRef1 = this.modalService.show(template1);
    }
+   closeUpdateModal(){
+    this.modalRef1.hide();
+   }
   ngOnInit() {
   }
   fileChange(event) {
@@ -131,8 +134,13 @@ export class MessageComponent implements OnInit {
       this.listeSMS.splice(i,1);
     }
   }
-  userClick:any;
+  userClick:any=null;
   getUser(i){
     this.userClick = this.listeSMS[i]
+  }
+  updateUser1(){
+    if(confirm("Etes-Vous sure de vouloir modifier ce client ?")){
+      this.closeUpdateModal();
+    }
   }
 }
