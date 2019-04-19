@@ -34,7 +34,22 @@ export class HandlerService {
   public liste(date1,date2): Promise<any>{
     let data = JSON.stringify({'datea':date1,'dateb':date2});
     let params="requestParam="+data;
+    console.log(params);
     let link=this.url+"/accueil/getListeByInterval";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
+  public addGroup(nomGroup): Promise<any>{
+    let data = JSON.stringify({'nomGroupe':nomGroup,'idUser':this.id});
+    let params="requestParam="+data;
+    console.log(params);
+    let link=this.url+"/sms/ajoutGroupe";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
+  public getGroup(): Promise<any>{
+    
+    let params="requestParam=";
+    console.log(params);
+    let link=this.url+"/sms/getGroups";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
   public newListe(id): Promise<any>{

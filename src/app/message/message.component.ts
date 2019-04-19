@@ -20,7 +20,7 @@ export class MessageComponent implements OnInit {
   message:string="";
   groupName:string="";
 
-  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+  constructor(private modalService: BsModalService,public _payService:HandlerService) { }
  
    modalRef1: BsModalRef;
   openModal1(template1: TemplateRef<any>) {
@@ -30,7 +30,19 @@ export class MessageComponent implements OnInit {
    closeUpdateModal(){
     this.modalRef1.hide();
    }
+
+   loadGroup(){
+    this._payService.getGroup().then(res=>{
+      console.log(res["rep"]);
+      this.listeGroupe =res["rep"];
+    })
+   }
+   listeGroupe:any;
   ngOnInit() {
+    this._payService.getGroup().then(res=>{
+      console.log(res["rep"]);
+      this.listeGroupe =res["rep"];
+    })
   }
   fileChange(event) {
     this.listeRecrutement =[];
@@ -81,9 +93,12 @@ export class MessageComponent implements OnInit {
   addGroup(){
     if(this.groupName != ""){
       if(confirm("Etes-Vous sure de vouloir enregistrer ce groupe ?")){
+        this._payService.addGroup(this.groupName).then(res =>{
+          console.log(res);
+        })
         //this.listeGroup.push("this.groupName");
         console.log(this.groupName);
-        
+        this.loadGroup();
       }
     }
   }

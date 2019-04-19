@@ -14,9 +14,9 @@ export class HistoriqueComponent implements OnInit {
   Recherhce(date1,date2){
     console.log(date1,date2);
     
-    this._derService.liste(date1,date2).then(res =>{
-      console.log(res);
-      //this.listSalarees = res['message'];
+    this._derService.liste(date1.toString(),date2.toString()).then(res =>{
+      console.log(res['message']);
+      this.listSalarees = res['message'];
        
       /*for(let i of  this.listSalarees){
         if(i.etat == 0){
@@ -28,9 +28,9 @@ export class HistoriqueComponent implements OnInit {
   }
   ngOnInit() {
     this.date = ((new Date()).toJSON()).split("T",2)[0];
-    this._derService.liste(this.date,this.date).then(res =>{
-       //console.log(res['message']);
-       //this.listSalarees = res['message'];
+    this._derService.liste(this.date.toString(),this.date.toString()).then(res =>{
+       console.log(res['message']);
+       this.listSalarees = res['message'];
         
        /*for(let i of  this.listSalarees){
          if(i.etat == 0){

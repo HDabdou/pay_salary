@@ -1,7 +1,7 @@
 <div class="container border border-info" style="margin-top: 1rem;border-radius: 2rem 2rem 1rem 1rem;border: 1px black;">
 <div>
   <tabset >
-    <tab heading="Ajouter contact" style="font-size: 9px;color: darkorange"  id="tab1">
+    <tab heading="Ajouter contact" (click)="loadGroup()"  id="tab1">
       <div class="row" style="margin-top: 1rem">
         <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
           <label for="file" class="label-file" style="font-size: 25px;margin-left: 1rem;position: absolute">Soumettre une liste</label>
@@ -11,7 +11,23 @@
     </div>
     <div  style="width:95%;margin-left:0.5em;margin-right:0.5em;margin-top:2em">
       <div *ngIf="listeExcel.length>0">
-          <table  class="table table-codensed table-striped">
+        <div class="row">
+            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
+              <label class="control-label" style="font-size: 1rem" >Group à envoyer</label>
+            </div>
+            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-4">
+              <select class="form-control" [(ngModel)]="groupSelect"  name="group" >
+                <option value="">Selection....</option>
+                <option *ngFor="let g of listeGroupe" value="{{g.id}}">{{g.nomgroupe}}</option>
+              </select>
+            </div>
+            <div *ngIf="groupSelect != ''" class=" col-lg-4 col-md-4 col-sm-4 col-xs-2" >
+              <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
+              <button style="margin-left:1rem" class="btn btn-primary" (click)="addContact()">Valider</button>
+            </div>
+        </div>
+
+          <table style="margin-top: 1rem;"  class="table table-codensed table-striped">
               <thead >
                 <tr>
                   <th scope="col">PRENOM</th>
@@ -30,17 +46,6 @@
                   </tbody>
             </table>
             
-            <div class="control-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <label class="control-label" style="font-size: 1rem" >Group à envoyer</label>
-              <select class="form-control" [(ngModel)]="groupSelect" style="margin-top: 1rem" name="group" >
-                <option value="">Selection....</option>
-                <option *ngFor="let g of listeGroup" value="{{g.nom}}">{{g.nom}}</option>
-              </select>
-            </div>
-            <div *ngIf="groupSelect != ''" class="control-group" style="margin-top:1rem">
-              <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
-              <button style="margin-left:1rem" class="btn btn-primary" (click)="addContact()">Valider</button>
-            </div>
       </div>
       
     </div>   
@@ -71,7 +76,7 @@
     
     <tab heading="Création de group">
       <div class="row" style="margin-top: 1rem">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
           <div class="control-group">
             <label class="control-label" style="font-size: 1rem" >Nom du group </label>
             <input class="form-control" [(ngModel)]="groupName" style="margin-top: 1rem" name="group" >
