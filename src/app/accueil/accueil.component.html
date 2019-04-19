@@ -1,21 +1,21 @@
  
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: 	#1E90FF !important">
     <a class="navbar-brand" style="color: white"><i class="fa fa-home" style="font-size:24px"></i> Accueil - user</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon" style="color: white"></span>
+    <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span (click)="closeNav()" class="navbar-toggler-icon" ></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <li class="nav-item" >
+        <li class="nav-item"  (click)="closeNav()" >
          <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','historique']">Historique</a>
         </li>
-        <li class="nav-item" >
+        <li class="nav-item" (click)="closeNav()">
         <a class="nav-link hide" data-toggle="pill" style="color: white;cursor: pointer;" [routerLink]="['/accueil','payment']">New payment</a>
         </li>
-        <li class="nav-item" >
+        <li class="nav-item"(click)="closeNav()" >
           <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','addinfo']">Add info</a>
         </li>
-        <li class="nav-item" >
+        <li class="nav-item" (click)="closeNav()" >
           <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','message']">Messagerie</a>
         </li>
         <li class="nav-item dropdown" style="float: right;">
@@ -23,8 +23,8 @@
             Parametre
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" (click)="sombre()"  style="cursor: pointer;">Sombre</a>
-            <a class="dropdown-item" (click)="claire()" style="cursor: pointer;">Claire</a>
+            <a class="dropdown-item" (click)="sombre();closeNav()"  style="cursor: pointer;">Sombre</a>
+            <a class="dropdown-item" (click)="claire();closeNav()" style="cursor: pointer;">Claire</a>
        </div>
         </li>
         <li class="nav-item">

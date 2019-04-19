@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ElementRef, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HandlerService } from '../service/handler.service';
 import { Chart } from 'chart.js';
@@ -24,6 +24,19 @@ export class AccueilComponent implements OnInit {
   display:number=0;
   intervalledateinit:string;
   intervalleddatefinal:string;
+  
+ myDiv;
+  closeNav(){
+    this.myDiv = document.getElementById("navbarNavDropdown");
+    //if(this.myDiv.classList.length == 3){
+      if(this.myDiv.style.display === "none"){
+        this.myDiv.style.display ="block";
+      }else{
+        this.myDiv.style.display = "none";
+      }
+   // }   
+  }
+
   constructor(private modalService: BsModalService,public _derService:HandlerService,public _paySarary:PaySalaryService,private route:Router,private connectionService:ConnexionService) { }
   rechercheIntervalle(){
     this.tabDate=[]
@@ -385,6 +398,8 @@ export class AccueilComponent implements OnInit {
   listDay:any = []
   listSalarees:any =[];
   ngOnInit() {
+    this.myDiv = document.getElementById("navbarNavDropdown");
+    this.myDiv.style.display = "none"
     let token=sessionStorage.getItem("token");
     let id=sessionStorage.getItem("id");
     this.connectionService.verifUser(token,id).then(rep =>{

@@ -15,6 +15,7 @@ export class HistoriqueComponent implements OnInit {
     this._derService.liste().then(res =>{
       // console.log(res['message']);
        this.listSalarees = res['message'];
+        
        /*for(let i of  this.listSalarees){
          if(i.etat == 0){
            this.boutonFaye = 1;

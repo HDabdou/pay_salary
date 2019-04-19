@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HandlerService } from '../service/handler.service';
 import * as XLSX from 'xlsx';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-message',
@@ -16,9 +17,19 @@ export class MessageComponent implements OnInit {
   data:any;
   boutonFaye:number = 0;
   tableBool:boolean=false;
+  message:string="";
+  groupName:string="";
 
-  constructor(public _derService:HandlerService) { }
-
+  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+ 
+   modalRef1: BsModalRef;
+  openModal1(template1: TemplateRef<any>) {
+    //this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
+    this.modalRef1 = this.modalService.show(template1);
+   }
+   closeUpdateModal(){
+    this.modalRef1.hide();
+   }
   ngOnInit() {
   }
   fileChange(event) {
@@ -66,21 +77,70 @@ export class MessageComponent implements OnInit {
     {nom:"Comptable"},
     {nom:"Developpeur"},
   ]
-  fayelene(){
-     this._derService.insertToBd(JSON.stringify(this.listeExcel)).then(rep =>{
-          console.log(rep);
-          this.listeExcel=[];
-      });
+  
+  addGroup(){
+    if(this.groupName != ""){
+      if(confirm("Etes-Vous sure de vouloir enregistrer ce groupe ?")){
+        //this.listeGroup.push("this.groupName");
+        console.log(this.groupName);
+        
+      }
+    }
   }
-  payeOne(employe:any,i:number){
-    let tabOne=[];
-    tabOne.push(employe);
-    this._derService.insertToBd(JSON.stringify(tabOne)).then(rep =>{
-        console.log(rep);
-        this.listeExcel.splice(i,1);
-    });
-
+  addContact(){
+    if(confirm("Etes-Vous sure de vouloir enregistrer ce liste ?")){
+      console.log(this.listeExcel);
+      console.log(this.groupSelect);
+      this.reinitialiser();
+    }
+  }
+  supprimer(i){
+    if(confirm("Etes-Vous sure de vouloir supprimer ce client ?")){
+      this.listeExcel.splice(i,1);
+    }
+  }
+  reinitialiser(){
+    this.listeExcel = [];
+    this.listeRecrutement = [];
+    this.fileName="";
+    this.file=null;
+    this.groupSelect="";
   }
 
+  sendSMS(){
+    console.log(this.message+" au "+this.groupSelect);
+    this.reinitialiser();
+  }
+  listeSMS:any=[];
+  recherche:string;
+  listeMessagerie =[
+    {nom:"Abdou",prenom:"FALL",tel:"779854080"},
+    {nom:"Fatou",prenom:"DIENG",tel:"783854080"},
+    {nom:"Naby",prenom:"NDIAYE",tel:"772220594"},
+    {nom:"Coumba",prenom:"DIOP",tel:"764854080"},
+  ]
 
+  rechecheSMS(){
+    this.listeSMS=[];
+    for(let i of this.listeMessagerie){
+      if(i.tel == this.recherche || i.nom == this.recherche || i.prenom == this.recherche){
+        this.listeSMS.push(i);
+      }
+    }
+    console.log(this.listeSMS);
+  }
+  supprimerReach(i){
+    if(confirm("Etes-Vous sure de vouloir supprimer ce client ?")){
+      this.listeSMS.splice(i,1);
+    }
+  }
+  userClick:any=null;
+  getUser(i){
+    this.userClick = this.listeSMS[i]
+  }
+  updateUser1(){
+    if(confirm("Etes-Vous sure de vouloir modifier ce client ?")){
+      this.closeUpdateModal();
+    }
+  }
 }
