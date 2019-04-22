@@ -241,25 +241,7 @@ export class DashboardComponent implements OnInit {
   }
  
   update(){
-    this._derService.liste().then(res =>{
-       this.Recouvrement= res['message'];
-       for(let i of this.Recouvrement){
-         
-         if(i.etat == 0){
-           this.nbRecouvrement = this.nbRecouvrement +1;
-           this.nomRec = this.nomRec + this.getInfo1(i.client,'montant');
-         }
-         if(i.etat == 1){
-           this.nbRV = this.nbRV +1;
-           this.nomRV = this.nomRV + this.getInfo1(i.client,'montant');
-         }
-         if(i.etat == 2){
-           this.nbFinalaliser = this.nbFinalaliser +1;
-           this.nomFN = this.nomFN + this.getInfo1(i.client,'montant');
-         }
-        
-       }
-    })
+   
   }
   them:any;
   

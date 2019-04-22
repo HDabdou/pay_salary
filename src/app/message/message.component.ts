@@ -19,8 +19,10 @@ export class MessageComponent implements OnInit {
   tableBool:boolean=false;
   message:string="";
   groupName:string="";
+  campagnName:string="";
+  numeroRecherche:string ="" ;
 
-  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+  constructor(private modalService: BsModalService,public _payService:HandlerService) { }
  
    modalRef1: BsModalRef;
   openModal1(template1: TemplateRef<any>) {
@@ -30,7 +32,19 @@ export class MessageComponent implements OnInit {
    closeUpdateModal(){
     this.modalRef1.hide();
    }
+
+   loadGroup(){
+    this._payService.getGroup().then(res=>{
+      console.log(res["rep"]);
+      this.listeGroupe =res["rep"];
+    })
+   }
+   listeGroupe:any;
   ngOnInit() {
+    this._payService.getGroup().then(res=>{
+      console.log(res["rep"]);
+      this.listeGroupe =res["rep"];
+    })
   }
   fileChange(event) {
     this.listeRecrutement =[];
@@ -81,19 +95,28 @@ export class MessageComponent implements OnInit {
   addGroup(){
     if(this.groupName != ""){
       if(confirm("Etes-Vous sure de vouloir enregistrer ce groupe ?")){
+        this._payService.addGroup(this.groupName).then(res =>{
+          console.log(res);
+        })
         //this.listeGroup.push("this.groupName");
         console.log(this.groupName);
-        
+        this.loadGroup();
       }
     }
   }
+
   addContact(){
     if(confirm("Etes-Vous sure de vouloir enregistrer ce liste ?")){
-      console.log(this.listeExcel);
-      console.log(this.groupSelect);
-      this.reinitialiser();
+      var listeContact = JSON.stringify(this.listeExcel) ;
+      console.log(listeContact) ;
+
+      this._payService.addContact(this.groupSelect, this.listeExcel).then(res =>{
+        console.log(res);
+        this.reinitialiser();
+      }) ;
     }
   }
+
   supprimer(i){
     if(confirm("Etes-Vous sure de vouloir supprimer ce client ?")){
       this.listeExcel.splice(i,1);
@@ -108,9 +131,17 @@ export class MessageComponent implements OnInit {
   }
 
   sendSMS(){
-    console.log(this.message+" au "+this.groupSelect);
+    if(this.groupSelect != ""){
+      if(confirm("Etes-Vous sure de vouloir enregistrer ce groupe ?")){
+        this._payService.addCampagn(this.campagnName, this.groupSelect, this.message).then(res =>{
+          console.log(res);
+        }) ;
+      }
+    }
     this.reinitialiser();
   }
+
+
   listeSMS:any=[];
   recherche:string;
   listeMessagerie =[
@@ -120,27 +151,41 @@ export class MessageComponent implements OnInit {
     {nom:"Coumba",prenom:"DIOP",tel:"764854080"},
   ]
 
-  rechecheSMS(){
-    this.listeSMS=[];
-    for(let i of this.listeMessagerie){
-      if(i.tel == this.recherche || i.nom == this.recherche || i.prenom == this.recherche){
-        this.listeSMS.push(i);
-      }
-    }
-    console.log(this.listeSMS);
+  listeContact : any[] ;
+
+  rechercherContact(){
+    this._payService.findContact(this.numeroRecherche).then(res=>{
+      this.listeSMS=res.rep;  
+    }) ; 
   }
+
   supprimerReach(i){
+    this.getUser(i) ;
     if(confirm("Etes-Vous sure de vouloir supprimer ce client ?")){
-      this.listeSMS.splice(i,1);
-    }
-  }
-  userClick:any=null;
-  getUser(i){
-    this.userClick = this.listeSMS[i]
-  }
-  updateUser1(){
-    if(confirm("Etes-Vous sure de vouloir modifier ce client ?")){
+      this._payService.deleteContact(this.userClick.id).then(res=>{
+        console.log(res) ;
+        this.listeSMS.splice(i,1);
+      }) ; 
       this.closeUpdateModal();
     }
+  }
+
+  userClick:any=null;
+  getUser(i){
+    this.userClick = this.listeSMS[i] ;
+  }
+
+  reinit(){
+   this.listeExcel = [] ;
+  }
+
+  updateUser1(){
+    if(confirm("Etes-Vous sure de vouloir modifier les information de ce contact ?")){      
+      this._payService.updateContact(this.userClick.id, this.userClick.prenom, this.userClick.nom, this.userClick.telephone).then(res=>{
+        console.log(res) ;
+      }) ; 
+      this.closeUpdateModal();
+    }
+
   }
 }

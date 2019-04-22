@@ -40,20 +40,69 @@ export class HandlerService {
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => { return res} ).catch(error => {console.log(error); return 'bad' });
   }
 
+  public liste(date1,date2): Promise<any>{
+    let data = JSON.stringify({'datea':date1,'dateb':date2});
+    let params="requestParam="+data;
+    console.log(params);
+    let link=this.url+"/accueil/getListeByInterval";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
 
-
-  public liste(): Promise<any>{
-
-    this.token=sessionStorage.getItem("token");
-
-    this.id=sessionStorage.getItem("id");
-
-    let params="requestParam="+(new Date()).toString();
-    let link=this.url+"/accueil/getListe";
+  public addContact(nomGroup, listContacts): Promise<any>{
+    let data = JSON.stringify({'nomGroupe':nomGroup,'contacts':listContacts});
+    let params="requestParam="+data;
+    //console.log(params);
+    let link=this.url+"/sms/ajoutContacts";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
 
 
+  public addGroup(nomGroup): Promise<any>{
+    let data = JSON.stringify({'nomGroupe':nomGroup,'idUser':this.id});
+    let params="requestParam="+data;
+    console.log(params);
+    let link=this.url+"/sms/ajoutGroupe";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
+
+  public addCampagn(campagnName, nomGroupe, message): Promise<any>{
+    let data = JSON.stringify({'campagnName':campagnName, 'nomGroupe':nomGroupe,'message':message});
+    let params="requestParam="+data;
+    console.log(params);
+    let link=this.url+"/sms/ajoutCampagne";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
+
+  public getGroup(): Promise<any>{
+    
+    let params="requestParam=";
+    console.log(params);
+    let link=this.url+"/sms/getGroups";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
+
+  public findContact(numero): Promise<any>{    
+    let data = JSON.stringify({'numero':numero});
+    let params="requestParam="+data;
+    let link=this.url+"/sms/findContact";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => { return res } ).catch(error => {console.log(error); return 'bad' });
+  }
+
+  public updateContact(id, prenom, nom, telephone): Promise<any>{    
+    let data = JSON.stringify({'id':id, 'prenom':prenom, 'nom':nom, 'telephone':telephone});
+    let params="requestParam="+data;
+    console.log(params) ;
+    let link=this.url+"/sms/updateContact";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => { return res } ).catch(error => {console.log(error); return 'bad' });
+  }
+
+  public deleteContact(id): Promise<any>{    
+    let data = JSON.stringify({'id':id});
+    let params="requestParam="+data;
+    console.log(params) ;
+    let link=this.url+"/sms/deleteContact";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => { return res } ).catch(error => {console.log(error); return 'bad' });
+  }
   
   public newListe(id): Promise<any>{
 

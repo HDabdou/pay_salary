@@ -8,12 +8,28 @@ import { HandlerService } from '../service/handler.service';
 })
 export class HistoriqueComponent implements OnInit {
   listSalarees:any =[];
-
+  date:any;
   constructor(public _derService:HandlerService) { }
+  
+  Recherhce(date1,date2){
+    console.log(date1,date2);
+    
+    this._derService.liste(date1.toString(),date2.toString()).then(res =>{
+      console.log(res['message']);
+      this.listSalarees = res['message'];
+       
+      /*for(let i of  this.listSalarees){
+        if(i.etat == 0){
+          this.boutonFaye = 1;
+        }
+      }*/
 
+    });
+  }
   ngOnInit() {
-    this._derService.liste().then(res =>{
-      // console.log(res['message']);
+    this.date = ((new Date()).toJSON()).split("T",2)[0];
+    this._derService.liste(this.date.toString(),this.date.toString()).then(res =>{
+       console.log(res['message']);
        this.listSalarees = res['message'];
         
        /*for(let i of  this.listSalarees){

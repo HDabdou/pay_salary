@@ -1,5 +1,5 @@
  
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: 	#1E90FF !important">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: 	#1E90FF !important ; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <a class="navbar-brand" style="color: white"><i class="fa fa-home" style="font-size:24px"></i> Accueil - user</a>
     <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span (click)="closeNav()" class="navbar-toggler-icon" ></span>
@@ -18,15 +18,16 @@
         <li class="nav-item" (click)="closeNav()" >
           <a class="nav-link" style="color: white;cursor: pointer;" [routerLink]="['/accueil','message']">Messagerie</a>
         </li>
-        <li class="nav-item dropdown" style="float: right;">
+<!--         <li class="nav-item dropdown" style="float: right;">
           <a class="nav-link dropdown-toggle" style="color: white;cursor: pointer;" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Parametre
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" (click)="sombre();closeNav()"  style="cursor: pointer;">Sombre</a>
             <a class="dropdown-item" (click)="claire();closeNav()" style="cursor: pointer;">Claire</a>
-       </div>
+        </div>
         </li>
+ -->        
         <li class="nav-item">
           <a class="nav-link btn btn-danger" (click)="deconnection()" style="color: white;cursor: pointer;">Déconnexion</a>
         </li>

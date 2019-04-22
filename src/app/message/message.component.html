@@ -1,137 +1,153 @@
-<div class="container border border-info" style="margin-top: 1rem;border-radius: 2rem 2rem 1rem 1rem;border: 1px black;">
-<div>
-  <tabset >
-    <tab heading="Ajouter contact" style="font-size: 9px;color: darkorange"  id="tab1">
-      <div class="row" style="margin-top: 1rem">
-        <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
-          <label for="file" class="label-file" style="font-size: 25px;margin-left: 1rem;position: absolute">Soumettre une liste</label>
-          <label style="margin-left: 16rem;font-size: 18px;color: black;margin-top: 8px;">{{fileName}}</label>
-          <input id="file" class="input-file" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls">
+<div  style="background-color: snow; height: -webkit-fill-available; margin-top: -2rem;     padding-top: 2rem;">
+  <div class="container border border-info" style="margin-top: 1rem;border-radius: 5px;border: 1px black; padding: 2rem ; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: white">
+  <div>
+    <tabset >
+      <tab heading="Ajouter contact" (click)="loadGroup()"  id="tab1">
+        <div class="row" style="margin-top: 1rem">
+          <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
+            <label for="file" class="label-file" style="font-size: 25px;margin-left: 1rem;position: absolute" (click)="reinit()">Soumettre une liste</label>
+            <label style="margin-left: 16rem;font-size: 18px;color: black;margin-top: 8px;">{{fileName}}</label>
+            <input id="file" class="input-file" type="file"  (change)="fileChange($event)" placeholder="Uploader Image" accept=".xlsx,.xls">
+          </div>
         </div>
-    </div>
-    <div  style="width:95%;margin-left:0.5em;margin-right:0.5em;margin-top:2em">
-      <div *ngIf="listeExcel.length>0">
-          <table  class="table table-codensed table-striped">
-              <thead >
-                <tr>
-                  <th scope="col">PRENOM</th>
-                  <th scope="col">NOM </th>
-                  <th scope="col">TELEPHONE</th>
-                  <th scope="col"> ACTION </th>
-                </tr>
-              </thead>
-              <tbody>
-                                       
-                <tr *ngFor="let l of listeExcel ; let i=index">
-                    <td >{{l.prenom}}</td>
-                    <td >{{l.nom}}</td>
-                    <td >{{l.telephone}}</td>
-                    <button (click)="supprimer(i)" class="btn btn-warning">Supprimer</button> 
-                  </tbody>
-            </table>
-            
-            <div class="control-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <label class="control-label" style="font-size: 1rem" >Group à envoyer</label>
-              <select class="form-control" [(ngModel)]="groupSelect" style="margin-top: 1rem" name="group" >
-                <option value="">Selection....</option>
-                <option *ngFor="let g of listeGroup" value="{{g.nom}}">{{g.nom}}</option>
-              </select>
-            </div>
-            <div *ngIf="groupSelect != ''" class="control-group" style="margin-top:1rem">
-              <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
-              <button style="margin-left:1rem" class="btn btn-primary" (click)="addContact()">Valider</button>
-            </div>
-      </div>
-      
-    </div>   
-    </tab>
-    <tab heading="Nouvelle campagne">
-      <div class="row" style="margin-top: 1rem">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="control-group">
-                  <label class="control-label" style="font-size: 1rem" >Group à envoyer</label>
-                <select class="form-control" [(ngModel)]="groupSelect" style="margin-top: 1rem" name="group" >
-                  <option value="">Selection....</option>
-                  <option *ngFor="let g of listeGroup" value="{{g.nom}}">{{g.nom}}</option>
+        <div  style="width:95%;margin-left:0.5em;margin-right:0.5em;margin-top:2em">
+        <div *ngIf="listeExcel.length>0">
+          <div class="row">
+              <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <label class="control-label" style="font-size: 1rem" ></label>
+              </div>
+              <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-4">
+                <select class="form-control" [(ngModel)]="groupSelect"  name="group" >
+                  <option value="">Selectionner un groupe ....</option>
+                  <option *ngFor="let g of listeGroupe" value="{{g.id}}">{{g.nomgroupe}}</option>
                 </select>
               </div>
-        </div>
-        <div *ngIf="groupSelect != '' " class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-          <div class="form-group">
-            <label for="comment">Message:</label>
-            <textarea class="form-control" [(ngModel)]="message" rows="5" id="comment"></textarea>
-          </div>
-          <div class="control-group" style="margin-top:1rem">
-            <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
-            <button style="margin-left:1rem" class="btn btn-primary" (click)="sendSMS()">Valider</button>
-          </div>
-        </div>
-      </div>
-    </tab>
-    
-    <tab heading="Création de group">
-      <div class="row" style="margin-top: 1rem">
-        <div class="col-6">
-          <div class="control-group">
-            <label class="control-label" style="font-size: 1rem" >Nom du group </label>
-            <input class="form-control" [(ngModel)]="groupName" style="margin-top: 1rem" name="group" >
-          </div>
-          <div class="control-group" style="margin-top:1rem">
-            <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
-            <button style="margin-left:1rem" class="btn btn-primary" (click)="addGroup()">Valider</button>
-          </div>
-        </div>
-      </div>
-    </tab>
-        
-    <tab heading="Option">
-        <div class="row" style="margin-top: 1rem">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="control-group">
-              <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                  <label class="control-label"  >Recheche </label>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
-                  <input class="form-control" [(ngModel)]="recherche"  name="recherche" >
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                  <button  class="btn btn-success" (click)="rechecheSMS()"><i class="fa fa-search"></i></button>
-                </div>
+              <div *ngIf="groupSelect != ''" class=" col-lg-4 col-md-4 col-sm-4 col-xs-2" >
+                <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
+                <button style="margin-left:1rem" class="btn btn-primary" (click)="addContact()">Valider</button>
               </div>
-            </div>
-            <div *ngIf="listeSMS.length >0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-              <div >
-                <table  class="table table-responsive table-codensed table-striped">
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <table style="margin-top: 1rem;"  class="table table-responsive table-codensed table-striped">
                   <thead >
                     <tr>
                       <th scope="col">PRENOM</th>
                       <th scope="col">NOM </th>
                       <th scope="col">TELEPHONE</th>
                       <th scope="col"> ACTION </th>
-                      <th scope="col"> ACTION </th>
                     </tr>
                   </thead>
-                  <tbody >
-                  <tr *ngFor="let l of listeSMS ; let i=index">
-                    <td >{{l.prenom}}</td>
-                    <td >{{l.nom}}</td>
-                    <td >{{l.tel}}</td>
-                    <td><button (click)="getUser(i);openModal1(template1)" class="btn btn-info">Modifier</button></td> 
-                    <td><button (click)="supprimerReach(i)" class="btn btn-warning">Supprimer</button></td>
-                  </tbody>
+                  <tbody>
+                                           
+                    <tr *ngFor="let l of listeExcel ; let i=index ">
+                        <td >{{l.prenom}}</td>
+                        <td >{{l.nom}}</td>
+                        <td >{{l.telephone}}</td>
+                        <button (click)="supprimer(i)" class="btn btn-warning">Supprimer</button> 
+                      </tbody>
                 </table>
               </div>
             </div>
-            
+              
+        </div>
+        
+      </div>   
+      </tab>
+      <tab heading="Nouvelle campagne"  (click)="loadGroup()" >
+        <div class="row" style="margin-top: 1rem">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                  <input class="form-control" [(ngModel)]="campagnName" style="margin-top: 1rem" name="campagn" placeholder="Nom Campagne">
+              </div>
+              <div class="row">
+                <div class="control-group">
+                      <label class="control-label" style="font-size: 1rem" ></label>
+                      <select class="form-control" [(ngModel)]="groupSelect" style="margin-top: 1rem" name="group" >
+                      <option value="">Selectionner un groupe ....</option>
+                      <option *ngFor="let g of listeGroupe" value="{{g.id}}">{{g.nomgroupe}}</option>
+                    </select>
+                </div>
+              </div>
+
+          </div>
+          <div *ngIf="groupSelect != '' " class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label for="comment">Message:</label>
+              <textarea class="form-control" [(ngModel)]="message" rows="5" id="comment"></textarea>
+            </div>
+            <div class="control-group" style="margin-top:1rem">
+              <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
+              <button style="margin-left:1rem" class="btn btn-primary" (click)="sendSMS()">Valider</button>
+            </div>
           </div>
         </div>
       </tab>
-  
-  </tabset>
+      
+      <tab heading="Création de groupe">
+        <div class="row" style="margin-top: 1rem">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+            <div class="control-group">
+              <label class="control-label" style="font-size: 1rem" >Nom du groupe </label>
+              <input class="form-control" [(ngModel)]="groupName" style="margin-top: 1rem" name="group" >
+            </div>
+            <div class="control-group" style="margin-top:1rem">
+              <button class="btn btn-danger" (click)="reinitialiser()">Annuler</button>
+              <button style="margin-left:1rem" class="btn btn-primary" (click)="addGroup()">Valider</button>
+            </div>
+          </div>
+        </div>
+      </tab>
+          
+      <tab heading="Option">
+          <div class="row" style="margin-top: 1rem">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div class="row">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
+                    <label class="control-label">Rechercher</label>  
+                  </div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 ">
+                    <input class="form-control"  [(ngModel)]="numeroRecherche" name="numerorecherche" />
+                  </div> 
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+                    <button  class="btn btn-success" (click)="rechercherContact()"><i class="fa fa-search"></i></button>
+                  </div>
+              </div>
+               <div  class="row" *ngIf=" listeSMS.length >0 ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <table  class="table table-responsive table-codensed table-striped" style="margin-top :2rem">
+                    <thead >
+                      <tr>
+                        <th scope="col">PRENOM</th>
+                        <th scope="col">NOM </th>
+                        <th scope="col">TELEPHONE</th>
+                        <th scope="col"> ACTION </th>
+                        <th scope="col"> ACTION </th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                    <tr *ngFor=" let l of listeSMS ; let i=index ">
+                      <td> {{l.prenom}}</td>
+                      <td> {{l.nom}}</td>
+                      <td> {{l.telephone}}</td>
+                      <td> <button (click)=" getUser(i); openModal1(template1) " class="btn btn-info">Modifier</button></td> 
+                      <td><button (click)="supprimerReach(i)" class="btn btn-warning">Supprimer</button></td>
+                     </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </tab>
+    
+    </tabset>
+  </div>
+  </div>
 </div>
-</div>
- 
+
 <ng-template #template1 >
     <div class="modal-header " style="background-color: dodgerblue;color:white">
       <h4 class="modal-title pull-left">Modification d'utilisateur</h4>
@@ -151,7 +167,7 @@
         </div>     
          <div class="control-group">
           <label for="" class="control-label">Téléphone</label>
-          <input type="text" class="form-control" [(ngModel)]="userClick.tel" name="login" id="IdLogin">
+          <input type="text" class="form-control" [(ngModel)]="userClick.telephone" name="login" id="IdLogin">
         </div>
         <div class="control-group" style="margin-top:1rem">
           <button (click)="closeUpdateModal()" class="btn btn-danger">Annuler</button>

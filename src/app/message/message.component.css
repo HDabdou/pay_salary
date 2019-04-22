@@ -1,3 +1,7 @@
+table{
+	border: 1px solid grey;
+}
+
 .label-file {
     cursor: pointer;
     color: #00b1ca;
@@ -9,4 +13,21 @@
 
 .input-file {
     display: none;
+}
+
+.btn-warning{
+	margin: 0.8rem
+}
+
+.btn-info{
+    margin: 0.8rem
+}
+
+.table-striped tbody tr{
+    background-color: white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #1E90FF;
+    color: white;
 }
