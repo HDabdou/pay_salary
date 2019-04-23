@@ -28,7 +28,7 @@ export class GestionCompteComponent implements OnInit {
   addUser(){
      this.modalRef.hide()
      this.connectionService.dolliUsers(this.user.prenom, this.user.nom, this.user.login, this.password).then(rep =>{
-      this.users = rep.rep ;
+      this.users = rep["rep"];
       if(this.password == this.Rpassword){
           this.users.push(this.user);
       }
@@ -82,8 +82,8 @@ export class GestionCompteComponent implements OnInit {
    deleteUser(i){
      if(confirm("Voulez-vous supprimer l'utilisareur !!!")){
         this.connectionService.farrUser(this.users[i].id).then(rep =>{
-        console.log(rep.rep) ;
-        this.users = rep.rep ;
+        console.log(rep["rep"]) ;
+        this.users = rep["rep"] ;
        }) ;
      }
    }
@@ -91,8 +91,8 @@ export class GestionCompteComponent implements OnInit {
 
   ngOnInit() {
    this.connectionService.getUsers().then(rep =>{
-    console.log(rep.rep) ;
-    this.users = rep.rep ;
+    console.log(rep["rep"]) ;
+    this.users = rep["rep"];
    }) ;
   }
 

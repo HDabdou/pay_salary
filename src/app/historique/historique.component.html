@@ -7,7 +7,7 @@
             <label  for="">Par date </label>
             <div class="row">
               <div class="col-lg-9 col-md-9 col-sm-9 col-xs-10 ">
-                  <input type="date" class="form-control" [(ngModel)]="date" name="date" id="idDate">
+                  <input style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);" type="date" class="form-control" [(ngModel)]="date" name="date" id="idDate">
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
                 <button class="btn btn-primary"(click)="Recherhce(date,date)" ><i class="fa fa-search"></i></button>
@@ -18,21 +18,21 @@
               <label  for="">Par intervalle </label>
               <div class="row">
                   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                    <input type="date" class="form-control" [(ngModel)]="dateDebut" name="dateDebut" id="iddateDebut">
+                    <input style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);" type="date" class="form-control" [(ngModel)]="dateDebut" name="dateDebut" id="iddateDebut">
                   </div>
                   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                    <input type="date" class="form-control" [(ngModel)]="dateFin" name="dateFin" id="iddateFin">
+                    <input style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);" type="date" class="form-control" [(ngModel)]="dateFin" name="dateFin" id="iddateFin">
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                      <button class="btn btn-primary" (click)="Recherhce(dateDebut,dateFin)"><i class="fa fa-search"></i></button>
+                      <button style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);" class="btn btn-primary" (click)="Rechercher(dateDebut,dateFin)"><i class="fa fa-search"></i></button>
                   </div>
               </div>
             </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);">
-        <label  for="">Recherhce ... </label>
-        <input type="text" class="form-control" [(ngModel)]="filtre" name="filtre" id="filtre">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+        <label  for="">Rechercher ... </label>
+        <input style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);"  type="text" class="form-control" [(ngModel)]="filtre" name="filtre" id="filtre">
       </div>
     </div>
   </div>

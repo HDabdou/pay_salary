@@ -47,6 +47,7 @@ export class HandlerService {
     let link=this.url+"/accueil/getListeByInterval";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
+  
 
   public addContact(nomGroup, listContacts): Promise<any>{
     let data = JSON.stringify({'nomGroupe':nomGroup,'contacts':listContacts});

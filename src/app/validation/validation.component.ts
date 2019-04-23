@@ -64,7 +64,8 @@ export class ValidationComponent implements OnInit {
    }
   ngOnInit() {
     this._derService.getPayValidation().then(res =>{
-       this.listeSalaire = res.info;
+       console.log(res);
+       this.listeSalaire = res["info"];
      });
   }
 

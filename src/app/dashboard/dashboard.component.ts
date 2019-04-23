@@ -25,109 +25,29 @@ export class DashboardComponent implements OnInit {
   intervalledateinit:string;
   intervalleddatefinal:string;
   rechercheIntervalle(){
-    this.tabDate=[]
-    this.tabRecouv=[]
-    this.tabRecouv=[];
-    this.tabRV=[];
-    this.tabFN=[];
-    this.listDay = [];
-    this._derService.rechercheIntervalle(this.intervalledateinit,this.intervalleddatefinal).then(res =>{
-      // console.log(res['message']);
-       this.listDay= res['message'];
-       if(this.listDay != undefined){
-        for(let i of this.listDay){
-          this.tabDate.push(i.dateEnregistremet)
-           if(i.etat == 0){
-            this.tabRecouv.push(this.getInfo1(i.client,'montant'));
-            this.tabFN.push(0);
-            this.tabRV.push(0);
-           }
-           if(i.etat == 1){
-            this.tabRV.push(this.getInfo1(i.client,'montant'));
-            this.tabRecouv.push(0);
-            this.tabFN.push(0);
-           }
-           if(i.etat == 2){
-            this.tabFN.push(this.getInfo1(i.client,'montant'));
-            this.tabRV.push(0);
-            this.tabRecouv.push(0);
-           }
-          
-         }
-       }else{
-        this.tabDate.push(this.intervalledateinit)
-        this.tabDate.push(this.intervalledateinit)
-        this.tabFN.push(0);
-        this.tabRV.push(0);
-        this.tabRecouv.push(0);
-        console.log(this.tabDate);
-       }
-      
-       //this.listRecouvremet = this.Recouvrement
-       console.log( this.tabDate); 
-       this.myChart2 = new Chart('myChart2', {
-        type: 'line',
-        data: {
-            labels: this.tabDate,
-            datasets: [{
-                label: 'Recouvrement',
-                data: this.tabRecouv,
-                borderColor: [
-                  '#A52A2A',
-                ],
-                borderWidth: 3
-                },
-               {
-                label: 'Rendez-vous',
-                data: this.tabRV,
-                borderColor: [
-                  '#007bff',
-                ],
-                borderWidth: 3
-                },
-                {
-                label: 'Finaliser',
-                data: this.tabFN,
-                borderColor: [
-                  'darkorange',
-                ],
-                borderWidth: 3
-              }
-          ]
-        },
-        options: {
-          events: ['click'],
-          legend: {
-            labels: {
-              fontColor: 'black'
-            }
-        }
-        
-        }
-    });
-     })
+    
   }
   boutonFaye:number = 0;
   listSalary =[
-    {nom:'Dieng',prenom:'Aliou',telephone:'773250277',salaire:'50000',zone:'Yoff',jAbsence:5,etat:1},
-    {nom:'Fall',prenom:'Modou',telephone:'779857780',salaire:'40000',zone:'Foire',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'779854080',salaire:'85000',zone:'Pikine',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'45000',zone:'Pikine',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'65000',zone:'Pikine',jAbsence:5,etat:1},
-    {nom:'Dieye',prenom:'Pape',telephone:'775662089',salaire:'45000',zone:'fann',jAbsence:5,etat:1},
-    {nom:'Dieng',prenom:'Aliou',telephone:'773250277',salaire:'50000',zone:'Yoff',jAbsence:5,etat:1},
-    {nom:'Fall',prenom:'Modou',telephone:'779857780',salaire:'40000',zone:'Foire',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'779854080',salaire:'85000',zone:'Pikine',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'45000',zone:'Pikine',jAbsence:5,etat:1},
-    {nom:'Tamba',prenom:'Issa',telephone:'778981663',salaire:'65000',zone:'Pikine',jAbsence:5,etat:1},
-    {nom:'Dieye',prenom:'Pape',telephone:'775662089',salaire:'45000',zone:'fann',jAbsence:5,etat:1},
+    {nom:'Dieng',prenom:'Aliou',USSD:'773250277',SALAIRE:'50000',zone:'Yoff',ABS_LIS:5,etat:1},
+    {nom:'Fall',prenom:'Modou',USSD:'779857780',SALAIRE:'40000',zone:'Foire',ABS_LIS:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',USSD:'779854080',SALAIRE:'85000',zone:'Pikine',ABS_LIS:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',USSD:'778981663',SALAIRE:'45000',zone:'Pikine',ABS_LIS:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',USSD:'778981663',SALAIRE:'65000',zone:'Pikine',ABS_LIS:5,etat:1},
+    {nom:'Dieye',prenom:'Pape',USSD:'775662089',SALAIRE:'45000',zone:'fann',ABS_LIS:5,etat:1},
+    {nom:'Dieng',prenom:'Aliou',USSD:'773250277',SALAIRE:'50000',zone:'Yoff',ABS_LIS:5,etat:1},
+    {nom:'Fall',prenom:'Modou',USSD:'779857780',SALAIRE:'40000',zone:'Foire',ABS_LIS:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',USSD:'779854080',SALAIRE:'85000',zone:'Pikine',ABS_LIS:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',USSD:'778981663',SALAIRE:'45000',zone:'Pikine',ABS_LIS:5,etat:1},
+    {nom:'Tamba',prenom:'Issa',USSD:'778981663',SALAIRE:'65000',zone:'Pikine',ABS_LIS:5,etat:1},
+    {nom:'Dieye',prenom:'Pape',USSD:'775662089',SALAIRE:'45000',zone:'fann',ABS_LIS:5,etat:1},
   ]
   inputRecherche:string = '';
   listRechecher:any =[]
   suiviAgnet(){
     this.listRechecher = [];
     for(let i of this.listSalary){
-      if(i.nom == this.inputRecherche || i.prenom == this.inputRecherche || i.telephone == this.inputRecherche ){
+      if(i.nom == this.inputRecherche || i.prenom == this.inputRecherche || i.USSD == this.inputRecherche ){
         this.listRechecher.push(i)
       }
     }
@@ -135,11 +55,11 @@ export class DashboardComponent implements OnInit {
   listSalaryAgent =[]
   displayEvolutionbi:number = 0;
   evolutionBi(i){
-    this.listSalaryAgent =[]
+    /*this.listSalaryAgent =[]
     let tel = this.listRechecher[i].telephone
     for(let i of this.listSalary){
-       this.listSalaryAgent.push(i.salaire)
-        console.log(i.salaire);
+       this.listSalaryAgent.push(i.SALAIRE)
+        console.log(i.SALAIRE);
     }
     console.log(this.listSalaryAgent);
     
@@ -170,7 +90,7 @@ export class DashboardComponent implements OnInit {
       
       }
   });
-  this.displayEvolutionbi = 1
+  this.displayEvolutionbi = 1*/
   }
   soumettreClieck(){
     //if(this.soumettre == 0){
@@ -252,10 +172,7 @@ export class DashboardComponent implements OnInit {
     this.them = 2;
   }
 
-  element = document.getElementById('navbarNavDropdown') as HTMLElement;
-  hideMenu(){
-    this.element.remove();
-  }
+ 
   changeThem(){
     if(this.them == 1){
       return  { 'themClaire': false,'themSombre':true};
@@ -310,86 +227,7 @@ export class DashboardComponent implements OnInit {
     this.route.navigate(['/login']);
   }
   Recherche(){
-    console.log(this.selectionjour);
-    this.tabDate=[]
-    this.tabRecouv=[]
-    this.tabRecouv=[];
-    this.tabRV=[];
-    this.tabFN=[];
-    this.listDay = [];
-    this._derService.recherche(this.selectionjour).then(res =>{
-      // console.log(res['message']);
-       this.listDay= res['message'];
-       if(this.listDay != undefined){
-        for(let i of this.listDay){
-          this.tabDate.push(i.dateEnregistremet)
-           if(i.etat == 0){
-            this.tabRecouv.push(this.getInfo1(i.client,'montant'));
-            this.tabFN.push(0);
-            this.tabRV.push(0);
-           }
-           if(i.etat == 1){
-            this.tabRV.push(this.getInfo1(i.client,'montant'));
-            this.tabRecouv.push(0);
-            this.tabFN.push(0);
-           }
-           if(i.etat == 2){
-            this.tabFN.push(this.getInfo1(i.client,'montant'));
-            this.tabRV.push(0);
-            this.tabRecouv.push(0);
-           }
-         }
-       }else{
-        this.tabDate.push(this.selectionjour)
-        this.tabFN.push(0);
-        this.tabRV.push(0);
-        this.tabRecouv.push(0);
-        console.log(this.tabDate);
-       }
       
-       //this.listRecouvremet = this.Recouvrement
-       console.log( this.tabDate); 
-       this.myChart2 = new Chart('myChart2', {
-        type: 'line',
-        data: {
-            labels: this.tabDate,
-            datasets: [{
-                label: 'Recouvrement',
-                data: this.tabRecouv,
-                borderColor: [
-                  '#A52A2A',
-                ],
-                borderWidth: 3
-                },
-               {
-                label: 'Rendez-vous',
-                data: this.tabRV,
-                borderColor: [
-                  '#007bff',
-                ],
-                borderWidth: 3
-                },
-                {
-                label: 'Finaliser',
-                data: this.tabFN,
-                borderColor: [
-                  'darkorange',
-                ],
-                borderWidth: 3
-              }
-          ]
-        },
-        options: {
-          events: ['click'],
-          legend: {
-            labels: {
-              fontColor: 'black'
-            }
-        }
-        
-        }
-    });
-     })
   }
   
   nbRecouvrement:number=0;
@@ -400,39 +238,104 @@ export class DashboardComponent implements OnInit {
   tabRV:any=[]
   tabFN:any=[]
   listDay:any = []
+  listeSalares=[];
+  listeMois=[];
+  listeInfo=[];
+
+  //somme par mois
+  SommeJanvier:number=0;
+  SommeFevrier:number=0;
+  SommeMars:number=0;
+  SommeAvril:number=0;
+  SommeMai:number=0;
+  SommeJuin:number=0;
+  SommeJuillet:number=0;
+  SommeAout:number=0;
+  SommeSeptembre:number=0;
+  SommeOctober:number=0;
+  SommeNovembre:number=0;
+  SommeDecembre:number=0;
   ngOnInit() {
    // var path = d3.geo.path() 
+   this._derService.liste("2019-01-01","2019-04-23").then(res =>{
+    console.log(res['message']);
+    this.listeInfo=res['message'];
+    for(let i of this.listeInfo){
+      if(i.dateEnregistrement.split("-")[1] == "01"){
+       this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "02"){
+       this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "03"){
+       this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "04"){
+       this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "05"){
+       this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "06"){
+       this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "07"){
+       this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "08"){
+       this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "09"){
+       this.SommeSeptembre= this.SommeSeptembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "10"){
+       this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "11"){
+       this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+      if(i.dateEnregistrement.split("-")[1] == "12"){
+       this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+      }      
+    
+    }
+    console.log(this.listeSalares);
+    console.log(this.listeMois);
+    this.myChart2 = new Chart('myChart2', {
+      responsive: true,
+      type: 'line',
+      data: {
+         
+        labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
+        //labels:this.listeMois,
+        datasets: [{
+             label:'les salaires de l\'année',
+             data: [this.SommeJanvier,this.SommeFevrier,this.SommeMars,this.SommeAvril,this.SommeMai,this.SommeJuin,this.SommeJuillet,this.SommeAout,this.SommeSeptembre,this.SommeOctober,this.SommeNovembre,this.SommeDecembre],
+            // data: this.listeSalares,
+             borderColor: [
+                '#A52A2A',
+              ],
+              borderWidth: 3
+              },
+            
+        ]
+      },
+      options: {
+        events: ['click'],
+        legend: {
+          labels: {
+            fontColor: '#007bff'
+          }
+      }
+      
+      }
+  });
+  });
     this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
     
        //this.listRecouvremet = this.Recouvrement
        console.log( this.tabDate); 
-       this.myChart2 = new Chart('myChart2', {
-        responsive: true,
-        type: 'line',
-        data: {
-           
-            labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
-            datasets: [{
-               label:'les salaires de l\'année',
-                data: [50000,52500,48000,60000,59000,55000,55500,38000,50000,49000,89000,35000],
-                borderColor: [
-                  '#A52A2A',
-                ],
-                borderWidth: 3
-                },
-              
-          ]
-        },
-        options: {
-          events: ['click'],
-          legend: {
-            labels: {
-              fontColor: '#007bff'
-            }
-        }
-        
-        }
-    });
+      
     
       //this.listRecouvremet = this.Recouvrement
       this.myChart = new Chart('myChart', {
@@ -490,70 +393,46 @@ export class DashboardComponent implements OnInit {
         }
     });
 
-    /*setInterval(() => {
-      this._derService.callPeriodicHandler().then( res => {
-      //console.log(res['message']);
-      if(res['code']==1){
-        this.lNewListe =[]
-        let id
-        for(let i = 0;i <this.Recouvrement.length - 1;++i){
-          id =this.Recouvrement[this.Recouvrement.length-1].id
-        }
-       this._derService.newListe(id).then(rep =>{
-          this.lNewListe = rep['message'];
-          this.newNotif =this.lNewListe.length;
-          console.log(this.newNotif);
-          for(let i of this.lNewListe){
-            this.Recouvrement.push(i);
-          }
-        })
-            this._derService.liste().then(res =>{
-     // console.log(res['message']);
-      this.Recouvrement= res['message'];
-      for(let i of this.Recouvrement){
-        
-        if(i.etat == 0){
-          this.nbRecouvrement = this.nbRecouvrement +1;
-          this.nomRec = this.nomRec + this.getInfo1(i.client,'montant');
-        }
-        if(i.etat == 1){
-          this.nbRV = this.nbRV +1;
-          this.nomRV = this.nomRV + this.getInfo1(i.client,'montant');
-        }
-        if(i.etat == 2){
-          this.nbFinalaliser = this.nbFinalaliser +1;
-          this.nomFN = this.nomFN + this.getInfo1(i.client,'montant');
-        }
-       
-      }
-      //this.listRecouvremet = this.Recouvrement
-      console.log('Recouvrement '+this.nomRec+' Rendez vous '+this.nomRV+' Finaliser '+this.nomFN); 
-
-    })
-      }
-   
-    } );
-      
-    }, 10000); */
-     // console.log(this.listRecouvremet);
+    
 
   }
   getInfo1(requete,nom){
     let req = JSON.parse(requete);
-    if(nom == "montant"){
-      return req.montant ;
+    if(nom == "INTERIM"){
+      return req.INTERIM ;
     }
-    if(nom == "nom"){
-      return req.nom;
+    if(nom == "LOCALITES"){
+      return req.LOCALITES;
     }
-    if(nom == "prenom"){
-      return req.prenom;   
+    if(nom == "USSD"){
+      return req.USSD;   
     }
-    if(nom == "telephone"){
-      return req.telephone;   
+    if(nom == "KIOSQUES"){
+      return req.KIOSQUES;   
     }
-    if(nom == "adresse"){
-      return req.adresse;   
+    if(nom == "SALAIRE"){
+      return req.SALAIRE;   
+    }
+    if(nom == "PRIME_UV"){
+      return req.PRIME_UV;   
+    }
+    if(nom == "MANQUANT_PAYE"){
+      return req.MANQUANT_PAYE;   
+    }
+    if(nom == "AVOIR"){
+      return req.AVOIR;   
+    }
+    if(nom == "ABS_LIS"){
+      return req.ABS_LIS;   
+    }
+    if(nom == "JOURS_D_ABSENCE"){
+      return req.JOURS_D_ABSENCE;   
+    }
+    if(nom == "SALAIRE_PERCU"){
+      return req.SALAIRE_PERCU;   
+    }
+    if(nom == "COM_INTERIM"){
+      return req.COM_INTERIM;   
     }
     return "null";
   }

@@ -41,7 +41,7 @@ export class ConnexionComponent implements OnInit {
   if(this.login==this.loginTest1 && this.password==this.passwordTest1){
     this.router.navigate(['/admin']);
   }else{
-      alert("ko")
+      //alert("ko")
     }
       
    
