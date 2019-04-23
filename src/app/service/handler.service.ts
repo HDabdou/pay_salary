@@ -246,6 +246,7 @@ export class HandlerService {
       });
     });
   }
+
   public facture(data:string){
 
     this.token=sessionStorage.getItem("token");
@@ -259,7 +260,18 @@ export class HandlerService {
         resolve(reponse);
       });
     });
+  }
+
+    public getPayValidation(){
+    let url=this.url+"/admin/getPayValidation";
+    let params="param="+JSON.stringify({data:""});
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,{headers:this.header}).subscribe(reponse =>{
+        resolve(reponse);
+      });
+    });
 
   }
+
 
 }

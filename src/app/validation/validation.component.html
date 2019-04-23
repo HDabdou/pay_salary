@@ -1,4 +1,4 @@
-<div class="row" >
+<div class="row" style="margin-top: 1rem;border-radius: 5px;border: 1px black; padding: 2rem ; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-color: white ;  margin-left: 0.5rem; margin-right: 0.5rem; margin-bottom: 0.5rem">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 1rem">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 1rem">
       <div class="row">
@@ -34,16 +34,16 @@
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let l of listeSalaire | filterBy: ['interim','ussd','kiosque','salaire']: filtre ; let i=index">
-        <td >{{l.interim}}</td>
-        <td >{{l.ussd}}</td>
-        <td >{{l.kiosque}}</td>
-        <td >{{l.salaire}}</td>
-        <td >{{l.prime_uv}}</td>
-        <td >{{l.manquant_paye}}</td>
-        <td >{{l.avoire}}</td>
-        <td >{{l.jour_absence}}</td>
-        <td >{{l.salaire_percu}}</td> 
+      <tr *ngFor="let l of listeSalaire | filterBy: ['INTERIM','USSD','KIOSQUES','SALAIRE']: filtre ; let i=index">
+        <td >{{l.INTERIM}}</td>
+        <td >{{l.USSD}}</td>
+        <td >{{l.KIOSQUES}}</td>
+        <td >{{l.SALAIRE}}</td>
+        <td >{{l.PRIME_UV}}</td>
+        <td >{{l.MANQUANT_PAYE}}</td>
+        <td >{{l.AVOIR}}</td>
+        <td >{{l.ABS_LIS}}</td>
+        <td >{{l.SALAIRE_PERCU}}</td> 
         <td *ngIf="l.etat == 0"> <span style="color: crimson"> <strong>non valider</strong> </span> </td> 
         <td *ngIf="l.etat == 1"> <span style="color: teal"><i class="fa fa-check-square-o" style="font-size:25px;color: teal"></i> <strong>Valider</strong></span> </td> 
         <td ><button class="btn btn-warning" (click)="openModal1(template1);getIndex(i)" type="submit"><i class="fa fa-pencil"></i> Modifier</button></td>
@@ -66,39 +66,39 @@
     <form   >
       <div class="control-group">
         <label for="" class="control-label">INTERIM</label>
-        <input  type="text" class="form-control" [(ngModel)]="lineClick.interim"  name="nom" id="idNom">
+        <input  type="text" class="form-control" [(ngModel)]="lineClick.INTERIM"  name="nom" id="idNom">
       </div>
       <div class="control-group">
         <label for="" class="control-label">USSD</label>
-        <input type="text"  class="form-control" [(ngModel)]="lineClick.ussd" name="prenom" id="IdPrenom">
+        <input type="text"  class="form-control" [(ngModel)]="lineClick.USSD" name="prenom" id="IdPrenom">
       </div>     
        <div class="control-group">
         <label for="" class="control-label">KIOSQUES</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.hiosques" name="login" id="IdLogin">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.KIOSQUES" name="login" id="IdLogin">
       </div>
       <div class="control-group">
         <label for="" class="control-label">SALAIRE</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.salaire" name="salaire" id="idsalaire">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.SALAIRE" name="salaire" id="idsalaire">
       </div>
       <div class="control-group">
         <label for="" class="control-label">PRIME UV</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.prime_uv" name="prime_uv" id="idPrime_uv">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.PRIME_UV" name="prime_uv" id="idPrime_uv">
       </div>
       <div class="control-group">
         <label for="" class="control-label">MANQUANT PAYE</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.manquant_paye" name="MANQUANT_PAYE" id="idMANQUANTPAYE">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.MANQUANT_PAYE" name="MANQUANT_PAYE" id="idMANQUANTPAYE">
       </div>
       <div class="control-group">
         <label for="" class="control-label">AVOIR</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.avoire" name="AVOIR" id="isAVOIR">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.AVOIR" name="AVOIR" id="isAVOIR">
       </div>
       <div class="control-group">
         <label for="" class="control-label">JOURS D'ABSENCE</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.jour_absence" name="JOURS_ABSENCE" id="JOURS_ABSENCE">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.ABS_LIS" name="JOURS_ABSENCE" id="JOURS_ABSENCE">
       </div>
       <div class="control-group">
         <label for="" class="control-label">SALAIRE PERCU</label>
-        <input type="text" class="form-control" [(ngModel)]="lineClick.salaire_percu" name="SALAIRE_PERCU" id="idSALAIRE_PERCU">
+        <input type="text" class="form-control" [(ngModel)]="lineClick.SALAIRE_PERCU" name="SALAIRE_PERCU" id="idSALAIRE_PERCU">
       </div>
       <div class="control-group" style="margin-top:1rem">
         <button (click)="closeUpdateModal()" class="btn btn-danger">Annuler</button>

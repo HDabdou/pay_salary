@@ -50,4 +50,53 @@ export class ConnexionService {
       });
     });
   }
+
+  getUsers(){
+    let url=this.link+"/admin/getUsers";
+    let params="param="+JSON.stringify({});
+    console.log(this.id);
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,this.httpOptions).subscribe(rep =>{
+        console.log(rep);
+        resolve(rep);
+      });
+    });
+  }
+
+  dolliUsers(prenom, nom, login, password){
+    let url=this.link+"/admin/yokkUsers";
+    let params="param="+JSON.stringify({prenom:prenom, nom:nom, login:login, password:password});
+    console.log(params);
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,this.httpOptions).subscribe(rep =>{
+        console.log(rep);
+        resolve(rep);
+      });
+    });
+  }
+
+  soppiMbirriUser(id, prenom, nom, login, password){
+    let url=this.link+"/admin/soppiMbirriUser";
+    let params="param="+JSON.stringify({id:id, prenom:prenom, nom:nom, login:login, password:password});
+    console.log(params);
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,this.httpOptions).subscribe(rep =>{
+        console.log(rep);
+        resolve(rep);
+      });
+    });
+  }
+
+  farrUser(id){
+    let url=this.link+"/admin/farrUser";
+    let params="param="+JSON.stringify({id:id});
+    console.log(params);
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,params,this.httpOptions).subscribe(rep =>{
+        console.log(rep);
+        resolve(rep);
+      });
+    });
+  }
+
 }

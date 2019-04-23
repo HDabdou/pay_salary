@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HandlerService } from '../service/handler.service';
 
+
 @Component({
   selector: 'app-validation',
   templateUrl: './validation.component.html',
@@ -15,13 +16,14 @@ export class ValidationComponent implements OnInit {
   Restartpassword:string;
   indice:any;
   user={nom:"",prenom:"",login:"",etat:0};
-  listeSalaire=[
+  listeSalaire=[] ; /*[
     {interim:"LEADER PAIE MARS",ussd:"779854080",kiosque:"louga",salaire:55000,prime_uv:0,manquant_paye:0,avoire:0,jour_absence:0,salaire_percu:0,etat:0},
     {interim:"LEADER PAIE MARS",ussd:"773214569",kiosque:"thies",salaire:48500,prime_uv:0,manquant_paye:0,avoire:0,jour_absence:0,salaire_percu:0,etat:0},
     {interim:"LEADER PAIE MARS",ussd:"779632541",kiosque:"fatick",salaire:45000,prime_uv:0,manquant_paye:0,avoire:0,jour_absence:0,salaire_percu:0,etat:0},
     {interim:"LEADER PAIE MARS",ussd:"773250277",kiosque:"dakar",salaire:50000,prime_uv:0,manquant_paye:0,avoire:0,jour_absence:0,salaire_percu:0,etat:0},
     {interim:"LEADER PAIE MARS",ussd:"777896325",kiosque:"kolda",salaire:41250,prime_uv:0,manquant_paye:0,avoire:0,jour_absence:0,salaire_percu:0,etat:0},
-  ]
+  ] */
+
   lineClick:any=null;
   validation(){
     for(let i of this.listeSalaire){
@@ -61,6 +63,9 @@ export class ValidationComponent implements OnInit {
      }
    }
   ngOnInit() {
+    this._derService.getPayValidation().then(res =>{
+       this.listeSalaire = res.info;
+     });
   }
 
 }

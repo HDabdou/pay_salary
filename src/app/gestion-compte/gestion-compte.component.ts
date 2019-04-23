@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HandlerService } from '../service/handler.service';
+import { ConnexionService } from '../service/connexion.service';
 
 @Component({
   selector: 'app-gestion-compte',
@@ -15,26 +16,42 @@ export class GestionCompteComponent implements OnInit {
   filtre:string;
   indice:any;
   user={nom:"",prenom:"",login:"",etat:0};
-  users=[
+  users=[]  ; /*[
     {nom:"NDIAYE",prenom:"Naby",login:"naby@naby.sn",etat:0},
     {nom:"DIOP",prenom:"Alioune",login:"alioune@alioune.sn",etat:1},
     {nom:"FALL",prenom:"Oumar",login:"oumar@oumar.sn",etat:0},
     {nom:"NDIAYE",prenom:"Fatou",login:"fatou@fatou.sn",etat:1},
-  ]
+  ] */
   userClick:any=null;
+
+
   addUser(){
-    if(this.password == this.Rpassword){
-      this.users.push(this.user);
-      this.modalRef.hide()
-   }
+     this.modalRef.hide()
+     this.connectionService.dolliUsers(this.user.prenom, this.user.nom, this.user.login, this.password).then(rep =>{
+      this.users = rep.rep ;
+      if(this.password == this.Rpassword){
+          this.users.push(this.user);
+      }
+    }) ;
   }
+
+  soppiUser(){
+    this.modalRef1.hide();
+    this.connectionService.soppiMbirriUser(this.Mid, this.Mprenom, this.Mnom, this.Mlogin, this.Restartpassword).then(rep =>{
+      console.log(rep) ;
+    }) ;
+  }
+
   Mnom:"";
   Mprenom:"";
   Mlogin:"";
+  Mid:any;
+
   getIndex(i){
     this.indice=i;
     this.userClick=this.users[i];
     console.log(this.userClick);
+    this.Mid=this.userClick.id;
     this.Mnom=this.userClick.nom;
     this.Mprenom=this.userClick.prenom;
     this.Mlogin=this.userClick.login;
@@ -50,7 +67,7 @@ export class GestionCompteComponent implements OnInit {
   closeUpdateModal(){
     this.modalRef1.hide();
   }
-  constructor(private modalService: BsModalService,public _derService:HandlerService) { }
+  constructor(private modalService: BsModalService,public _derService:HandlerService, private connectionService:ConnexionService) { }
   modalRef: BsModalRef;
   openModal(template: TemplateRef<any>) {
     //this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
@@ -63,12 +80,20 @@ export class GestionCompteComponent implements OnInit {
    }
 
    deleteUser(i){
-    //this.users.splice(i,1);
-     if(confirm("Voulez supprimer l'ustilisareur !!!")){
-       this.users.splice(i,1);
+     if(confirm("Voulez-vous supprimer l'utilisareur !!!")){
+        this.connectionService.farrUser(this.users[i].id).then(rep =>{
+        console.log(rep.rep) ;
+        this.users = rep.rep ;
+       }) ;
      }
    }
+
+
   ngOnInit() {
+   this.connectionService.getUsers().then(rep =>{
+    console.log(rep.rep) ;
+    this.users = rep.rep ;
+   }) ;
   }
 
 }

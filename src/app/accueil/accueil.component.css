@@ -122,4 +122,13 @@ myBtnMenu {
     height: 1000px;
     position: absolute;
     font-family: Montserrat,sans-serif;
-    padding: 0;margin: 0}
+    padding: 0;margin: 0
+}
+
+.nav-item:hover{
+  border-bottom: 2px solid white;
+}
+
+.nav-item:active{
+  border-bottom: 2px solid white;
+}

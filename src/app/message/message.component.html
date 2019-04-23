@@ -19,7 +19,7 @@
               <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-4">
                 <select class="form-control" [(ngModel)]="groupSelect"  name="group" >
                   <option value="">Selectionner un groupe ....</option>
-                  <option *ngFor="let g of listeGroupe" value="{{g.id}}">{{g.nomgroupe}}</option>
+                  <option *ngFor="let g of listeGroupe" value="{{g.nomgroupe}}">{{g.nomgroupe}}</option>
                 </select>
               </div>
               <div *ngIf="groupSelect != ''" class=" col-lg-4 col-md-4 col-sm-4 col-xs-2" >
@@ -66,7 +66,7 @@
                       <label class="control-label" style="font-size: 1rem" ></label>
                       <select class="form-control" [(ngModel)]="groupSelect" style="margin-top: 1rem" name="group" >
                       <option value="">Selectionner un groupe ....</option>
-                      <option *ngFor="let g of listeGroupe" value="{{g.id}}">{{g.nomgroupe}}</option>
+                      <option *ngFor="let g of listeGroupe" value="{{g.nomgroupe}}">{{g.nomgroupe}}</option>
                     </select>
                 </div>
               </div>

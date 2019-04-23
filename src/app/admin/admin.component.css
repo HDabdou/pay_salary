@@ -126,3 +126,11 @@ myBtnMenu {
 a{
     color: black;
 }
+
+.nav-item:hover{
+  border-bottom: 2px solid white;
+}
+
+.nav-item:active{
+  border-bottom: 2px solid white;
+}
