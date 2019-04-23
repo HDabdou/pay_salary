@@ -25,7 +25,92 @@ export class DashboardComponent implements OnInit {
   intervalledateinit:string;
   intervalleddatefinal:string;
   rechercheIntervalle(){
-    
+    this.SommeJanvier=0;
+    this.SommeFevrier=0;
+    this.SommeMars=0;
+    this.SommeAvril=0;
+    this.SommeMai=0;
+    this.SommeJuin=0;
+    this.SommeJuillet=0;
+    this.SommeAout=0;
+    this.SommeSeptembre=0;
+    this.SommeOctober=0;
+    this.SommeNovembre=0;
+    this.SommeDecembre=0;
+    this._derService.liste(this.intervalledateinit.toString(),this.intervalleddatefinal.toString()).then(res =>{
+      console.log(res['message']);
+      this.listeInfo=res['message'];
+      for(let i of this.listeInfo){
+        if(i.dateEnregistrement.split("-")[1] == "01"){
+         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "02"){
+         this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "03"){
+         this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "04"){
+         this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "05"){
+         this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "06"){
+         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "07"){
+         this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "08"){
+         this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "09"){
+         this.SommeSeptembre= this.SommeSeptembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "10"){
+         this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "11"){
+         this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "12"){
+         this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+      
+      }
+      console.log(this.listeSalares);
+      console.log(this.listeMois);
+      this.myChart2 = new Chart('myChart2', {
+        responsive: true,
+        type: 'line',
+        data: {
+           
+          labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
+          //labels:this.listeMois,
+          datasets: [{
+               label:'les salaires de l\'année',
+               data: [this.SommeJanvier,this.SommeFevrier,this.SommeMars,this.SommeAvril,this.SommeMai,this.SommeJuin,this.SommeJuillet,this.SommeAout,this.SommeSeptembre,this.SommeOctober,this.SommeNovembre,this.SommeDecembre],
+              // data: this.listeSalares,
+               borderColor: [
+                  '#A52A2A',
+                ],
+                borderWidth: 3
+                },
+              
+          ]
+        },
+        options: {
+          events: ['click'],
+          legend: {
+            labels: {
+              fontColor: '#007bff'
+            }
+        }
+        
+        }
+    });
+    });
   }
   boutonFaye:number = 0;
   listSalary =[
@@ -55,7 +140,7 @@ export class DashboardComponent implements OnInit {
   listSalaryAgent =[]
   displayEvolutionbi:number = 0;
   evolutionBi(i){
-    /*this.listSalaryAgent =[]
+    this.listSalaryAgent =[]
     let tel = this.listRechecher[i].telephone
     for(let i of this.listSalary){
        this.listSalaryAgent.push(i.SALAIRE)
@@ -90,7 +175,7 @@ export class DashboardComponent implements OnInit {
       
       }
   });
-  this.displayEvolutionbi = 1*/
+  this.displayEvolutionbi = 1
   }
   soumettreClieck(){
     //if(this.soumettre == 0){
@@ -227,7 +312,92 @@ export class DashboardComponent implements OnInit {
     this.route.navigate(['/login']);
   }
   Recherche(){
+    this.SommeJanvier=0;
+    this.SommeFevrier=0;
+    this.SommeMars=0;
+    this.SommeAvril=0;
+    this.SommeMai=0;
+    this.SommeJuin=0;
+    this.SommeJuillet=0;
+    this.SommeAout=0;
+    this.SommeSeptembre=0;
+    this.SommeOctober=0;
+    this.SommeNovembre=0;
+    this.SommeDecembre=0;
+    this._derService.liste(this.selectionjour.toString(),this.selectionjour.toString()).then(res =>{
+      console.log(res['message']);
+      this.listeInfo=res['message'];
+      for(let i of this.listeInfo){
+        if(i.dateEnregistrement.split("-")[1] == "01"){
+         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "02"){
+         this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "03"){
+         this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "04"){
+         this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "05"){
+         this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "06"){
+         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "07"){
+         this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "08"){
+         this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "09"){
+         this.SommeSeptembre= this.SommeSeptembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "10"){
+         this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "11"){
+         this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
+        if(i.dateEnregistrement.split("-")[1] == "12"){
+         this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+        }      
       
+      }
+      console.log(this.listeSalares);
+      console.log(this.listeMois);
+      this.myChart2 = new Chart('myChart2', {
+        responsive: true,
+        type: 'line',
+        data: {
+           
+          labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
+          //labels:this.listeMois,
+          datasets: [{
+               label:'les salaires de l\'année',
+               data: [this.SommeJanvier,this.SommeFevrier,this.SommeMars,this.SommeAvril,this.SommeMai,this.SommeJuin,this.SommeJuillet,this.SommeAout,this.SommeSeptembre,this.SommeOctober,this.SommeNovembre,this.SommeDecembre],
+              // data: this.listeSalares,
+               borderColor: [
+                  '#A52A2A',
+                ],
+                borderWidth: 3
+                },
+              
+          ]
+        },
+        options: {
+          events: ['click'],
+          legend: {
+            labels: {
+              fontColor: '#007bff'
+            }
+        }
+        
+        }
+    });
+    });
   }
   
   nbRecouvrement:number=0;
@@ -257,7 +427,20 @@ export class DashboardComponent implements OnInit {
   SommeDecembre:number=0;
   ngOnInit() {
    // var path = d3.geo.path() 
-   this._derService.liste("2019-01-01","2019-04-23").then(res =>{
+   this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
+   this._derService.liste(this.selectionjour.toString(),this.selectionjour.toString()).then(res =>{
+    this.SommeJanvier=0;
+    this.SommeFevrier=0;
+    this.SommeMars=0;
+    this.SommeAvril=0;
+    this.SommeMai=0;
+    this.SommeJuin=0;
+    this.SommeJuillet=0;
+    this.SommeAout=0;
+    this.SommeSeptembre=0;
+    this.SommeOctober=0;
+    this.SommeNovembre=0;
+    this.SommeDecembre=0;
     console.log(res['message']);
     this.listeInfo=res['message'];
     for(let i of this.listeInfo){
@@ -331,7 +514,7 @@ export class DashboardComponent implements OnInit {
       }
   });
   });
-    this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
+   
     
        //this.listRecouvremet = this.Recouvrement
        console.log( this.tabDate); 
