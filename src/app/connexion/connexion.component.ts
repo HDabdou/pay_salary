@@ -32,7 +32,10 @@ export class ConnexionComponent implements OnInit {
 
        sessionStorage.setItem("token",rep.token);
        sessionStorage.setItem("id",rep.id.toString());
-      this.router.navigate(['/accueil']);
+       if(rep.id == "1")
+         this.router.navigate(['/admin']);
+       else
+         this.router.navigate(['/accueil']);
      }else{
        this.Error=true;
      }
