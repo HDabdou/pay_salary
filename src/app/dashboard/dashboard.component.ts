@@ -13,7 +13,7 @@ import * as XLSX from 'xlsx';
 export class DashboardComponent implements OnInit {
 
 
-
+  loader:boolean=false;
   soumettre:number = 0;
   reponse:string='';
   message:string='';
@@ -24,7 +24,10 @@ export class DashboardComponent implements OnInit {
   display:number=0;
   intervalledateinit:string;
   intervalleddatefinal:string;
+
+  localites: Array<any> = []
   rechercheIntervalle(){
+   this.loader =true
     this.SommeJanvier=0;
     this.SommeFevrier=0;
     this.SommeMars=0;
@@ -79,6 +82,7 @@ export class DashboardComponent implements OnInit {
         }      
       
       }
+      this.loader=false
       console.log(this.listeSalares);
       console.log(this.listeMois);
       this.myChart2 = new Chart('myChart2', {
@@ -111,6 +115,7 @@ export class DashboardComponent implements OnInit {
         }
     });
     });
+    
   }
   boutonFaye:number = 0;
   listSalary =[
@@ -131,6 +136,7 @@ export class DashboardComponent implements OnInit {
   listRechecher:any =[]
   suiviAgnet(){
     this.listRechecher = [];
+    //this.listRechecher.push(this.listSalary.find(agent => agent.USSD === this.inputRecherche));
     for(let i of this.listSalary){
       if(i.nom == this.inputRecherche || i.prenom == this.inputRecherche || i.USSD == this.inputRecherche ){
         this.listRechecher.push(i)
@@ -209,6 +215,7 @@ export class DashboardComponent implements OnInit {
   file :any;
   data:any;
   selectionjour:string
+  selectionjourLocalite:string;
   listeExcel:any = [];
   listeRecrutement:any = [];
   fileName:any;
@@ -311,7 +318,50 @@ export class DashboardComponent implements OnInit {
   deconnexion(){
     this.route.navigate(['/login']);
   }
+  rechercherLocalite(){
+    this.localites = [];
+    this._derService.liste(this.selectionjourLocalite.toString(),this.selectionjourLocalite.toString()).then(res =>{
+      console.log("infos loclité ");
+      
+      let listSalaier = res['message'];
+      for(let i of listSalaier){
+        this.getLocalite(this.getInfo1(i.infoSalaries,'LOCALITES'),i);
+      }
+      console.log(this.localites);
+      let loc =[];
+      let mtt =[];
+      let colorBack = [];
+       
+      for(let i of this.localites){
+        loc.push(i.localite);
+        mtt.push(i.montant);
+        colorBack.push(this.dynamicColors());
+      }
+      this.myChart = new Chart('myChart', {
+        type: 'pie',
+        data: {
+            labels: loc,
+            datasets: [{
+                label: '# of Votes',
+                data: mtt,
+                backgroundColor:colorBack,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    });
+  }
   Recherche(){
+    this.loader = true;
     this.SommeJanvier=0;
     this.SommeFevrier=0;
     this.SommeMars=0;
@@ -366,6 +416,7 @@ export class DashboardComponent implements OnInit {
         }      
       
       }
+      this.loader =false;
       console.log(this.listeSalares);
       console.log(this.listeMois);
       this.myChart2 = new Chart('myChart2', {
@@ -425,9 +476,18 @@ export class DashboardComponent implements OnInit {
   SommeOctober:number=0;
   SommeNovembre:number=0;
   SommeDecembre:number=0;
+
+  dynamicColors = function() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return "rgb(" + r + "," + g + "," + b + ")";
+ };
   ngOnInit() {
    // var path = d3.geo.path() 
+   this.loader = true;
    this.selectionjour =  ((new Date()).toJSON()).split("T",2)[0];
+   this.selectionjourLocalite =  ((new Date()).toJSON()).split("T",2)[0];
    this._derService.liste(this.selectionjour.toString(),this.selectionjour.toString()).then(res =>{
     this.SommeJanvier=0;
     this.SommeFevrier=0;
@@ -482,6 +542,7 @@ export class DashboardComponent implements OnInit {
       }      
     
     }
+    this.loader =false;
     console.log(this.listeSalares);
     console.log(this.listeMois);
     this.myChart2 = new Chart('myChart2', {
@@ -518,66 +579,71 @@ export class DashboardComponent implements OnInit {
     
        //this.listRecouvremet = this.Recouvrement
        console.log( this.tabDate); 
-      
-    
-      //this.listRecouvremet = this.Recouvrement
-      this.myChart = new Chart('myChart', {
-        responsive: true,
-        type: 'doughnut',
-        data: {
-            labels: ["Yoff", "Pikine", "Fann"],
-            datasets: [{
-                label: '# of Votes',
-               
-                data: [500000,490000, 510000],
-                backgroundColor: [
-                  '#A52A2A',
-                  '#007bff',
-                  'darkorange'
-                ],
-                borderColor: [
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white'
-                ],
-                borderWidth: 3
-            }]
-        },
-        options: {
-          events: ['click'],
-          legend: {
-            labels: {
-              fontColor: '#007bff'
-            }
-        },
+       this._derService.liste(this.selectionjour.toString(),this.selectionjour.toString()).then(res =>{
+        console.log("infos loclité ");
         
-         onClick: function(e) {
-            var element = this.getElementAtEvent(e);
-            if (element.length) {
-              console.log(element[0]);
-              var chartData = element[0]['_chart'].config.data;
-              var idx = element[0]['_index'];
-              console.log('Recouvrement '+this.nomRec+' Rendez vous '+this.nomRV+' Finaliser '+this.nomFN);
-  
-              console.log(idx);
-              this.liste=1
-              var label = chartData.labels[idx];
-              var value = chartData.datasets[0].data[idx];
-              
-              this.modalRef1.show('template1');
-              var url =label + "  à  " + value;
-              console.log(url);
-              alert(url);
-            }
-          }
+        let listSalaier = res['message'];
+        for(let i of listSalaier){
+          this.getLocalite(this.getInfo1(i.infoSalaries,'LOCALITES'),i);
         }
-    });
+        console.log(this.localites);
+        let loc =[];
+        let mtt =[];
+        let colorBack = [];
+       
+        for(let i of this.localites){
+          loc.push(i.localite);
+          mtt.push(i.montant);
+          colorBack.push(this.dynamicColors());
+        }
+
+        this.myChart = new Chart('myChart', {
+          type: 'pie',
+          data: {
+              labels: loc,
+              datasets: [{
+                  label: '# of Votes',
+                  data: mtt,
+                  backgroundColor: colorBack,
+                 
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+      });
+    
 
     
 
+  }
+  getLocalite(localite1,i){
+    if(this.localites.find(place =>place.localite == localite1)){
+      let objet = this.localites.find(place =>place.localite == localite1);
+      if(this.getInfo1(i.infoSalaries,'SALAIRE') != null ||this.getInfo1(i.infoSalaries,'SALAIRE') != ""){
+        objet.montant = objet.montant + parseInt(this.getInfo1(i.infoSalaries,'SALAIRE'));
+      }
+      
+
+    }else{
+      let newObjet ={
+        localite:"",
+        montant:0
+      }
+      newObjet.localite =localite1;
+      if(this.getInfo1(i.infoSalaries,'SALAIRE') != null ||this.getInfo1(i.infoSalaries,'SALAIRE') != ""){
+        newObjet.montant = newObjet.montant + parseInt(this.getInfo1(i.infoSalaries,'SALAIRE'));
+      }
+      this.localites.push(newObjet);
+    }
   }
   getInfo1(requete,nom){
     let req = JSON.parse(requete);

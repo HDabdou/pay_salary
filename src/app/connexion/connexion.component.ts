@@ -18,9 +18,11 @@ export class ConnexionComponent implements OnInit {
   loginTest1:string='admin1';
   passwordTest1:string='passer1';
   Error:boolean=false;
+  loader:boolean = false;
   
   onConnect(){
   // console.log('ok');
+  this.loader = true;
   if(this.login!=undefined && this.login!="" && this.password!="" && this.password!=""){
     console.log(this.login);
    this.connectionService.connection(this.login,this.password).then(rep =>{
@@ -32,16 +34,19 @@ export class ConnexionComponent implements OnInit {
 
        sessionStorage.setItem("token",rep.token);
        sessionStorage.setItem("id",rep.id.toString());
+       this.loader = true;
        if(rep.id == "1")
          this.router.navigate(['/admin']);
        else
          this.router.navigate(['/accueil']);
      }else{
        this.Error=true;
+       this.loader = true;
      }
    });
   }
   if(this.login==this.loginTest1 && this.password==this.passwordTest1){
+    this.loader = true;
     this.router.navigate(['/admin']);
   }else{
       //alert("ko")
