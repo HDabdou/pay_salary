@@ -127,7 +127,7 @@ export class HandlerService {
     let link=this.url+"/recherche.php";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
-
+  
 
 
   public rechercheIntervalle(dateD,dateF): Promise<any>{
@@ -139,6 +139,17 @@ export class HandlerService {
     let data = JSON.stringify({dateD:dateD,dateF:dateF});
     let params ='param='+data;
     let link=this.url+"/rechercheIntervalle.php";
+    return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
+  }
+  public getKiosque(numero,date1,date2): Promise<any>{
+
+    this.token=sessionStorage.getItem("token");
+
+    this.id=sessionStorage.getItem("id");
+
+    let data = JSON.stringify({numero:numero,id:"23",token:"d702cb43e1f3197c91ab016781beb2f3fb561c11",dateDebut:date1,dateFin:date2});
+    let params ='param='+data;
+    let link="http://localhost:8088/pay_salary_middleware/public/accueil/getKiosque";
     return this.http.post(link,params,{headers:this.header}).toPromise().then( res => {console.log(res); return res} ).catch(error => {console.log(error); return 'bad' });
   }
 

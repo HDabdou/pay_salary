@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 
 
   loader:boolean=false;
+  loader1:boolean=false;
   soumettre:number = 0;
   reponse:string='';
   message:string='';
@@ -24,6 +25,11 @@ export class DashboardComponent implements OnInit {
   display:number=0;
   intervalledateinit:string;
   intervalleddatefinal:string;
+  intervalledateinitLocaliter:string;
+  intervalleddatefinalLocaliter:string;
+  intervalledateinitKiosque:string;
+  intervalleddatefinalKiosque:string;
+  
 
   localites: Array<any> = []
   rechercheIntervalle(){
@@ -45,41 +51,41 @@ export class DashboardComponent implements OnInit {
       this.listeInfo=res['message'];
       for(let i of this.listeInfo){
         if(i.dateEnregistrement.split("-")[1] == "01"){
-         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "02"){
-         this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "03"){
-         this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "04"){
-         this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "05"){
-         this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "06"){
-         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "07"){
-         this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "08"){
-         this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "09"){
-         this.SommeSeptembre= this.SommeSeptembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "10"){
-         this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "11"){
-         this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "12"){
-         this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
+          this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "02"){
+          this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "03"){
+          this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "04"){
+          this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "05"){
+          this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "06"){
+          this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "07"){
+          this.SommeJuillet = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "08"){
+          this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "09"){
+          this.SommeAout= this.SommeAout + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "10"){
+          this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "11"){
+          this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "12"){
+          this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }
       
       }
       this.loader=false
@@ -135,24 +141,91 @@ export class DashboardComponent implements OnInit {
   inputRecherche:string = '';
   listRechecher:any =[]
   suiviAgnet(){
+    
     this.listRechecher = [];
-    //this.listRechecher.push(this.listSalary.find(agent => agent.USSD === this.inputRecherche));
-    for(let i of this.listSalary){
-      if(i.nom == this.inputRecherche || i.prenom == this.inputRecherche || i.USSD == this.inputRecherche ){
-        this.listRechecher.push(i)
+    this._derService.getKiosque(this.inputRecherche,this.intervalledateinitKiosque,this.intervalleddatefinalKiosque).then(res =>{
+      let list = res['message'];
+      //console.log(list);
+      
+      for(let i of list){        
+        console.log(this.getInfo1(i.infosup,'USSD'));
+        
+        this.getKiosque(this.getInfo1(i.infosup,'USSD'),i);
       }
-    }
+      console.log(this.listRechecher);
+      
+    });
+    //this.listRechecher.push(this.listSalary.find(agent => agent.USSD === this.inputRecherche));
+    //for(let i of this.listSalary){
+      //if(i.nom == this.inputRecherche || i.prenom == this.inputRecherche || i.USSD == this.inputRecherche ){
+        //this.listRechecher.push(i)
+      //}
+    //}
   }
   listSalaryAgent =[]
   displayEvolutionbi:number = 0;
   evolutionBi(i){
-    this.listSalaryAgent =[]
-    let tel = this.listRechecher[i].telephone
-    for(let i of this.listSalary){
-       this.listSalaryAgent.push(i.SALAIRE)
-        console.log(i.SALAIRE);
+    //this.listSalaryAgent =[]
+    this.loader1=true;
+    this.SommeJanvier=0;
+    this.SommeFevrier=0;
+    this.SommeMars=0;
+    this.SommeAvril=0;
+    this.SommeMai=0;
+    this.SommeJuin=0;
+    this.SommeJuillet=0;
+    this.SommeAout=0;
+    this.SommeSeptembre=0;
+    this.SommeOctober=0;
+    this.SommeNovembre=0;
+    this.SommeDecembre=0;
+    let listKiosqueSalary = this.listRechecher[i].listSalaire
+    let listKiosqueDate = this.listRechecher[i].dateEnregistrement
+    console.log(listKiosqueSalary);
+    
+    for(let j of listKiosqueSalary ){
+     
+      if(j.date.split("-")[1] == "01"){
+        this.SommeJanvier = this.SommeJanvier + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "02"){
+        this.SommeFevrier = this.SommeFevrier + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "03"){
+        this.SommeMars = this.SommeMars + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "04"){
+        this.SommeAvril = this.SommeAvril + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "05"){
+        this.SommeMai = this.SommeMai + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "06"){
+        this.SommeJuin = this.SommeJuin + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "07"){
+        this.SommeJuillet = this.SommeJuillet + j.salaire;  
+       }      
+       if(j.date.split("-")[1] == "08"){
+        this.SommeAout = this.SommeAout + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "09"){
+        this.SommeSeptembre= this.SommeSeptembre + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "10"){
+        this.SommeOctober = this.SommeOctober + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "11"){
+        this.SommeNovembre = this.SommeNovembre + j.salaire;   
+       }      
+       if(j.date.split("-")[1] == "12"){
+        this.SommeDecembre = this.SommeDecembre + j.salaire;   
+       }      
+       this.loader1=false;
+
     }
-    console.log(this.listSalaryAgent);
+    console.log(this.SommeJanvier,this.SommeFevrier,this.SommeMars,this.SommeAvril,this.SommeMai,this.SommeJuin,this.SommeJuillet,this.SommeAout,this.SommeSeptembre,this.SommeOctober,this.SommeNovembre,this.SommeDecembre);
+    
     
     this.myChart2 = new Chart('myChart3', {
       responsive: true,
@@ -162,7 +235,7 @@ export class DashboardComponent implements OnInit {
           labels: ['janvier','fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
           datasets: [{
              label:'les salaires de l\'année',
-              data: this.listSalaryAgent,
+              data:  [this.SommeJanvier,this.SommeFevrier,this.SommeMars,this.SommeAvril,this.SommeMai,this.SommeJuin,this.SommeJuillet,this.SommeAout,this.SommeSeptembre,this.SommeOctober,this.SommeNovembre,this.SommeDecembre],
               borderColor: [
                 '#A52A2A',
               ],
@@ -293,8 +366,12 @@ export class DashboardComponent implements OnInit {
   lFinaliser = [];
   modalRef: BsModalRef;
   openModal(template: TemplateRef<any>) {
-    //this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
-    this.modalRef = this.modalService.show(template);
+    this.inputRecherche =null;
+    this.listRechecher =[];
+    this.intervalledateinitKiosque =null;
+    this.intervalleddatefinalKiosque = null;
+    this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'modal-lg' }));
+    //this.modalRef = this.modalService.show(template);
    }
   modalRef1: BsModalRef;
   openModal1(template1: TemplateRef<any>) {
@@ -319,6 +396,7 @@ export class DashboardComponent implements OnInit {
     this.route.navigate(['/login']);
   }
   rechercherLocalite(){
+    this.loader =true;
     this.localites = [];
     this._derService.liste(this.selectionjourLocalite.toString(),this.selectionjourLocalite.toString()).then(res =>{
       console.log("infos loclité ");
@@ -337,6 +415,51 @@ export class DashboardComponent implements OnInit {
         mtt.push(i.montant);
         colorBack.push(this.dynamicColors());
       }
+      this.loader=false;
+      this.myChart = new Chart('myChart', {
+        type: 'pie',
+        data: {
+            labels: loc,
+            datasets: [{
+                label: '# of Votes',
+                data: mtt,
+                backgroundColor:colorBack,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    });
+  }
+  rechercheIntervalleLocaliter(){
+    this.loader=true;
+    this.localites = [];
+    this._derService.liste(this.intervalledateinitLocaliter.toString(),this.intervalleddatefinalLocaliter.toString()).then(res =>{
+      console.log("infos loclité ");
+      
+      let listSalaier = res['message'];
+      for(let i of listSalaier){
+        this.getLocalite(this.getInfo1(i.infoSalaries,'LOCALITES'),i);
+      }
+      console.log(this.localites);
+      let loc =[];
+      let mtt =[];
+      let colorBack = [];
+      
+      for(let i of this.localites){
+        loc.push(i.localite);
+        mtt.push(i.montant);
+        colorBack.push(this.dynamicColors());
+      }
+      this.loader=false;
       this.myChart = new Chart('myChart', {
         type: 'pie',
         data: {
@@ -379,41 +502,41 @@ export class DashboardComponent implements OnInit {
       this.listeInfo=res['message'];
       for(let i of this.listeInfo){
         if(i.dateEnregistrement.split("-")[1] == "01"){
-         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "02"){
-         this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "03"){
-         this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "04"){
-         this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "05"){
-         this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "06"){
-         this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "07"){
-         this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "08"){
-         this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "09"){
-         this.SommeSeptembre= this.SommeSeptembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "10"){
-         this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "11"){
-         this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
-        if(i.dateEnregistrement.split("-")[1] == "12"){
-         this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
-        }      
+          this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "02"){
+          this.SommeFevrier = this.SommeFevrier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "03"){
+          this.SommeMars = this.SommeMars + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "04"){
+          this.SommeAvril = this.SommeAvril + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "05"){
+          this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "06"){
+          this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "07"){
+          this.SommeJuillet = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "08"){
+          this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "09"){
+          this.SommeAout= this.SommeAout + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "10"){
+          this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "11"){
+          this.SommeNovembre = this.SommeNovembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
+         if(i.dateEnregistrement.split("-")[1] == "12"){
+          this.SommeDecembre = this.SommeDecembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+         }      
       
       }
       this.loader =false;
@@ -520,16 +643,16 @@ export class DashboardComponent implements OnInit {
        this.SommeMai = this.SommeMai + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
       }      
       if(i.dateEnregistrement.split("-")[1] == "06"){
-       this.SommeJanvier = this.SommeJanvier + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+       this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
       }      
       if(i.dateEnregistrement.split("-")[1] == "07"){
-       this.SommeJuin = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+       this.SommeJuillet = this.SommeJuin + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
       }      
       if(i.dateEnregistrement.split("-")[1] == "08"){
        this.SommeJuillet = this.SommeJuillet + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
       }      
       if(i.dateEnregistrement.split("-")[1] == "09"){
-       this.SommeSeptembre= this.SommeSeptembre + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
+       this.SommeAout= this.SommeAout + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
       }      
       if(i.dateEnregistrement.split("-")[1] == "10"){
        this.SommeOctober = this.SommeOctober + this.getInfo1(i.infoSalaries,'SALAIRE_PERCU');   
@@ -625,6 +748,29 @@ export class DashboardComponent implements OnInit {
     
 
   }
+  getKiosque(localite1,i){
+    if(this.listRechecher.find(place =>place.USSD == localite1)){
+      let objet = this.listRechecher.find(place =>place.USSD == localite1);
+      objet.listSalaire.push({'date':i.dateEnregistrement,'salaire':parseInt(this.getInfo1(i.infosup,'SALAIRE'))});
+
+    }else{
+      let newObjet ={
+        USSD:"",
+        adresse:"",
+        kiosque:"",
+        dateEnregistrement:[],
+        listSalaire:[]
+      }
+      newObjet.USSD =localite1;
+      newObjet.adresse = this.getInfo1(i.infosup,'LOCALITES');
+      newObjet.kiosque =  this.getInfo1(i.infosup,'KIOSQUES');
+      newObjet.dateEnregistrement.push(i.dateEnregistrement);
+      newObjet.listSalaire.push({'date':i.dateEnregistrement,'salaire':parseInt(this.getInfo1(i.infosup,'SALAIRE'))});
+      this.listRechecher.push(newObjet);
+    }
+    console.log(this.listRechecher);
+    
+  }
   getLocalite(localite1,i){
     if(this.localites.find(place =>place.localite == localite1)){
       let objet = this.localites.find(place =>place.localite == localite1);
@@ -644,6 +790,7 @@ export class DashboardComponent implements OnInit {
       }
       this.localites.push(newObjet);
     }
+    
   }
   getInfo1(requete,nom){
     let req = JSON.parse(requete);
